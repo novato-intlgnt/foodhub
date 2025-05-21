@@ -1,0 +1,197 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #ffeaea 0%, #fff5f5 50%, #ffdede 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    transition: background 0.5s ease;
+}
+
+
+/* NAVBAR */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 100vh;
+    background: #f4524c;
+    color: white;
+    text-align: center;
+    box-shadow: inset 0 0 50px rgba(172, 8, 8, 0.5);
+    z-index: 1000;
+    padding-top: 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: start;
+    height: 100%;
+}
+
+nav li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+}
+
+nav img {
+    width: 40px;
+    transition: transform 0.3s ease;
+}
+
+nav img:hover {
+    transform: scale(1.2);
+}
+
+nav p {
+    margin-top: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+/* CONTENEDOR PRINCIPAL */
+#contenedor-cartas {
+    margin-left: 100px; /* espacio para el nav */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* CAMPANITA */
+#contenedor-cartas a {
+    align-self: flex-end;
+    padding: 10px;
+    transition: transform 0.3s ease;
+}
+.estado-pedido {
+    align-self: flex-end;
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    color:white ;
+    background: rgb(179, 179, 179);
+}
+
+#contenedor-cartas a:hover {
+    transform: scale(1.4);
+}
+
+/* CARTAS */
+.carta {
+    background: white;
+    border-radius: 20px;
+    max-width: 400px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 40px 0;
+    transition: transform 0.3s ease;
+}
+
+.carta:hover {
+    transform: scale(1.010);
+}
+
+.carta img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    object-fit: cover;
+}
+
+.info-comida {
+    padding: 15px;
+}
+
+.info-comida h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #f4524c;
+}
+
+.info-comida p {
+    margin-bottom: 5px;
+    color: #444;
+}
+
+/* MOVIMIENTOS / MENÚ DESPLEGABLE */
+.movimientos {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+}
+
+.desplegable {
+    width: 100%;
+    padding: 12px 20px;
+    background: white;
+    border: 2px solid #f4524c;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #f4524c;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.desplegable:hover {
+    background: #f4524c;
+    color: white;
+}
+
+#listaMovimientos {
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #f4524c;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+/* ITEM DE MOVIMIENTO */
+#listaMovimientos > div {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+#producto {
+    font-weight: bold;
+    color: #444;
+}
+
+#precio {
+    color: #f4524c;
+    font-weight: bold;
+}
+
+#fecha {
+    color: green;
+    font-size: 14px;
+}
+#fecha {
+    color: green;
+    font-size: 14px;
+}
+
+ /* MENU DESPLEGABLE */
+
+
+.desplegable div div {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}

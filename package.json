@@ -1,0 +1,48 @@
+{
+  "name": "foodhub",
+  "version": "1.0.0",
+  "description": "Smart food court solution for real-time ordering, vendor control, and seamless customer experience.",
+  "homepage": "https://github.com/novato-intlgnt/foodhub#readme",
+  "bugs": {
+    "url": "https://github.com/novato-intlgnt/foodhub/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/novato-intlgnt/foodhub.git"
+  },
+  "license": "MIT",
+  "type": "commonjs",
+  "contributors": [
+    {
+      "name": "Emilio A. Condori Pallardel",
+      "email": "emilio.pallardel@gmail.com"
+    },
+    {
+      "name": "Angelo J. Quispe Zuares",
+      "email": "angeloquispesuarez@gmail.com"
+    },
+    {
+      "name": "Lizzy A. Huayhua Perez",
+      "email": "thinking@gmail.com"
+    }
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./src/server.mjs"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "nodemailer": "^7.0.3",
+    "pg": "^8.16.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "standard": "^17.1.2"
+  }
+}

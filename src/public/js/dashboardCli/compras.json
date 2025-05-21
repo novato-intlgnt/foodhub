@@ -1,0 +1,29 @@
+[
+  { "fecha": "2025-05-01", "producto": "Pizza Napolitana", "precio": 28.5 },
+  { "fecha": "2025-05-02", "producto": "Hamburguesa doble", "precio": 22.0 },
+  { "fecha": "2025-05-03", "producto": "Pollo broaster", "precio": 18.9 },
+  { "fecha": "2025-05-04", "producto": "Ensalada César", "precio": 15.0 },
+  { "fecha": "2025-05-05", "producto": "Ceviche mixto", "precio": 30.0 },
+  { "fecha": "2025-05-06", "producto": "Lomo saltado", "precio": 26.5 },
+  { "fecha": "2025-05-07", "producto": "Tacos al pastor", "precio": 20.0 },
+  { "fecha": "2025-05-08", "producto": "Arroz chaufa", "precio": 19.0 },
+  { "fecha": "2025-05-09", "producto": "Shawarma", "precio": 21.5 },
+  { "fecha": "2025-05-10", "producto": "Fettuccine Alfredo", "precio": 25.0 },
+  { "fecha": "2025-05-11", "producto": "Sushi roll", "precio": 32.0 },
+  { "fecha": "2025-05-12", "producto": "Chifa especial", "precio": 27.9 },
+  {
+    "fecha": "2025-05-14",
+    "producto": "Pasta basica de cocaina",
+    "precio": 12.0
+  },
+  { "fecha": "2025-05-15", "producto": "Anticuchos", "precio": 16.0 },
+  { "fecha": "2025-05-16", "producto": "Jalea de mariscos", "precio": 35.0 },
+  { "fecha": "2025-05-17", "producto": "Burrito mixto", "precio": 23.0 },
+  { "fecha": "2025-05-18", "producto": "Choripán", "precio": 14.5 },
+  { "fecha": "2025-05-19", "producto": "Ramen", "precio": 29.0 },
+  {
+    "fecha": "2025-05-20",
+    "producto": "Tallarines rojos con pollo",
+    "precio": 24.0
+  }
+]

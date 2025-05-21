@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #fbdada;
+}
+
+header {
+  background-color: #f5544d;
+  padding: 20px 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-right: 50px;
+  font-weight: bold;
+}
+
+.login-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-weight: bold;
+}
+
+.login-icon a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.intro {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 40px 30px;
+  flex-wrap: wrap;
+}
+
+.intro-image img {
+  max-width: 380px;
+  height: auto;
+}
+
+.intro-text {
+  max-width: 500px;
+}
+
+.intro-text h1 {
+  font-size: 90px;
+  font-weight: bold;
+  padding-left: 100px;
+  font-family: "Jomhuria", cursive;
+}
+
+.intro-text h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+  padding-left: 100px;
+}
+
+.intro-text p {
+  margin-top: 10px;
+  font-size: 15px;
+  text-justify: distribute-all-lines;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  padding: 20px 30px;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.feature-box {
+  width: 250px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.feature-box img {
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px;
+}
+.features p {
+  color: black;
+}
+footer {
+  background-color: #f5544d;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}

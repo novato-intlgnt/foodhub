@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <link rel="shortcut icon" href="/assets/icons/favicon.ico" />
+    <link rel="stylesheet" href="/css/dashboard/dashboard.css" />
+    <link rel="stylesheet" href="/css/dashboard/input_dash.css" />
+    <link rel="stylesheet" href="/css/dashboard/explorer.css" />
+    <link rel="stylesheet" href="/css/dashboard/library.css" />
+    <link rel="stylesheet" href="/css/dashboard/popup.css" />
+    <!-- Boxicons CDN Link -->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="/js/dashboard/dashboard.js" defer></script>
+    <script src="/js/dashboard/input_dash.js" defer></script>
+    <script src="/js/dashboard/explorer.js" defer></script>
+    <script src="/js/dashboard/library.js" defer></script>
+    <script src="/js/dashboard/popup-search.js" defer></script>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo-details">
+        <img src="/assets/images/logo.png" class="logo"></img>
+        <div class="logo_name">LyricFusion</div>
+        <i class="fi fi-rr-menu-burger" id="btn"></i>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <i class="fi fi-rr-search"></i>
+          <div class="container-search">
+            <div class="input-bx">
+              <input class="sidebar-input" type="text" id="artist" required/>
+              <span><i class="fi fi-rr-microphone"></i> Artist</span>
+            </div>
+            <div class="input-bx">
+              <input class="sidebar-input" type="text" id="songs" required/>
+              <span><i class="fi fi-rr-list-music"></i> Songs</span>
+            </div>
+          </div>
+        <span class="tooltip">Search</span>
+        </li>
+        <li>
+          <a id="btn-library" href="#">
+            <i class="fi fi-rr-books-medical"></i>
+            <span class="links_name">Lyric Library</span>
+          </a>
+          <span class="tooltip">Lyric Library</span>
+        </li>
+        <li>
+          <a href="#explorer-section">
+            <i class="fi fi-rr-site-alt"></i>
+            <span class="links_name">Lyric Explorer</span>
+          </a>
+          <span class="tooltip">Lyric Explorer</span>
+        </li>
+        <li>
+          <a href="#about-section">
+            <i class="fi fi-rr-info"></i>
+            <span class="links_name">About us</span>
+          </a>
+          <span class="tooltip">About us</span>
+        </li>
+        <li class="profile">
+          <div class="profile-details">
+            <img src="profile.jpg" alt="profileImg" />
+            <div class="name_job">
+              <div id="user" class="name"> a</div>
+            </div>
+          </div>
+          <i class="fi fi-rr-sign-out-alt" id="log_out"></i>
+        </li>
+      </ul>
+    </div>
+    <!-- Library section-->
+    <section id="library-section" class="home-section">
+      <div class="library-header">
+        <div class="text">Lyric library</div>
+        <div id="searchGallery" class="search-box">
+          <input id="inputSearch" class='input-search' type="text" placeholder="Type to search..">
+          <div id="iconSearch" class="icon-search">
+            <i class='fi fi-rr-search'></i>
+          </div>
+          <div id="cancelSearch" class="cancel-icon">
+            <i class="fi fi-rr-cross-small"></i>
+          </div>
+          <div id="songData" class="search-data">
+        </div>
+        </div>
+      </div>
+      <div class="container-gallery">
+        <ul id="user-gallery" class="gallery"></ul>
+      </div>
+      <div class="footer">
+        <div class="pages">
+        </div>
+        <button class="select-btn" type=""><i class="fi fi-rr-choose"></i> select</button>
+        <div class="actions-container">
+          <button id="cancel-btn" class="action-btn cancel"><i class="fi fi-rr-cross"></i> cancel</button>
+          <button id="ready-btn" class="action-btn ready"><i class="fi fi-rr-check"></i> ready</button>
+        </div>
+      </div>
+    </section>
+    <!-- Explorer section-->
+    <section id="explorer-section" class="home-section">
+      <div class="text">Lyric Explorer</div>
+      <div class="container-search-net">
+        <h2>Search lyrics</h2>
+        <form id="form-explorer" class="form-explorer" action="">
+          <div class="inputs">
+            <div class="input-bx">
+              <input type="text" id="artistNet" name="artistNet" required/>
+              <span><i class="fi fi-rr-microphone"></i> Artist</span>
+            </div>
+            <div class="input-bx">
+              <input type="text" id="songsNet" name="songNet" required/>
+              <span><i class="fi fi-rr-list-music"></i> Songs</span>
+            </div>
+          </div>
+          <button type="submit">
+            <i class="fi fi-br-search"></i>
+          </button>
+        </form>
+      </div>
+      <ul id="list-songs" class="list-songs">
+      </ul>
+    </section>
+    <!-- About us section-->
+    <section id="about-section" class="home-section">
+      <div class="text">About Us</div>
+    </section>
+
+    <div class="container-popup">
+      <ul class="list-songs popup-search">
+      </ul>
+    </div>
+
+    <script src="/js/dashboard/library-utils.js" ></script>
+  </body>
+</html>
