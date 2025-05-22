@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Formulario de Pedido</title>
+    <link rel="stylesheet" href="dashboardtienda.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <script src="dashboardtienda.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <div class="icon-user">
+          <i class="bx bx-user"></i>
+        </div>
+      </aside>
+
+      <main class="form-container">
+        <div class="row">
+          <label>ID de empleado</label>
+          <input type="text" />
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>Fecha</label>
+            <input type="date" />
+          </div>
+          <div class="col">
+            <label>Nro de pedido</label>
+            <input type="text" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>Cliente</label>
+            <input type="text" />
+          </div>
+          <div class="col">
+            <label>Modo de pago</label>
+            <input type="text" />
+          </div>
+        </div>
+
+        <div class="row product-inputs">
+          <input type="text" placeholder="Producto" />
+          <input type="number" placeholder="Cantidad" />
+          <input type="number" placeholder="P. unidad" />
+          <input type="text" placeholder="Total" readonly />
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>P. unidad</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Productos agregados -->
+            </tbody>
+          </table>
+        </div>
+        <div class="actions">
+          <button class="btn-secondary">Agregar</button>
+          <button class="btn-primary">Guardar</button>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

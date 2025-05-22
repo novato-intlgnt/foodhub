@@ -10,7 +10,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: #1a2634;
+  background: #e74c3c;
   margin-left: 55px;
   border-radius: 10px;
   height: 85px;
@@ -44,34 +44,34 @@
   left: 0;
   padding-left: 14px;
   font-size: 15px;
-  color: #b0bec5ff;
+  color: #fff;
   pointer-events: none;
   transition: all 0.6s ease;
   line-height: 1;
 }
 .input-bx span i {
   font-size: 13px;
-  color: #b0bec5ff;
+  color: #fff;
   transition: all 0.6s ease;
   line-height: 1;
 }
 .input-bx input:valid ~ span,
 .input-bx input:focus ~ span {
-  color: #039be5ff;
+  color: #039be5;
   transform: translateX(14px) translateY(-100%);
   font-size: 10px;
   font-weight: 600;
   padding: 0 5px;
-  background: #1a2634ff;
+  background: #e74c3c;
   letter-spacing: 0.1rem;
 }
 .input-bx input:valid ~ span i,
 .input-bx input:focus ~ span i {
-  color: #039be5ff;
+  color: #039be5;
   transform: translateX(14px) translateY(-50%);
   font-size: 10px;
   font-weight: 600;
-  background: #1a2634ff;
+  background: #e74c3c;
   letter-spacing: 0.1rem;
 }
 .input-bx input:valid,
@@ -127,7 +127,7 @@
   font-family: "Mulish";
   font-weight: 400;
   font-size: 15px;
-  color: #a6a6a6;
+  color: #fff;
 }
 
 .search-box .icon-search {

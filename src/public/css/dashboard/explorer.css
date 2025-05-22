@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #1a2634ff;
+  background: #e74c3c;
   flex-direction: column;
   margin-left: 55px;
   border-radius: 10px;
@@ -26,7 +26,7 @@
   height: 40px;
   width: 93%;
   padding-left: 10px;
-  border: 2px solid #b0bec5ff;
+  border: 2px solid #b0bec5;
   border-radius: 7px;
   outline: none;
   font-size: 17px;
@@ -42,25 +42,25 @@
   left: 0;
   padding-left: 14px;
   font-size: 16px;
-  color: #b0bec5ff;
+  color: #b0bec5;
   pointer-events: none;
   transition: all 0.6s ease;
   line-height: 1;
 }
 .inputs .input-bx span i {
   font-size: 13px;
-  color: #b0bec5ff;
+  color: #b0bec5;
   transition: all 0.6s ease;
   line-height: 1;
 }
 .inputs .input-bx input:valid ~ span,
 .inputs .input-bx input:focus ~ span {
-  color: #039be5ff;
+  color: #039be5;
   transform: translateX(16px) translateY(-160%);
   font-size: 13px;
   font-weight: 600;
   padding: 0 5px;
-  background: #1a2634ff;
+  background: #1a2634;
   letter-spacing: 0.1rem;
 }
 .inputs .input-bx input:valid ~ span i,

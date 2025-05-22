@@ -33,6 +33,9 @@ export const createApp = ({ userModel, emailService }) => {
   app.get('/loginStail', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'loginStail.html'))
   })
+  app.get('/dash', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', '/dash/dashboardtienda.html'))
+  })
   app.use('/user', createUserRouter({ userModel, emailService }))
 
   app.listen(PORT, () => {
