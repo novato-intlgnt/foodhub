@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 
 
 dotenv.config()
-export class UserModel {
+export class WorkerModel {
   static async check ({ input }) {
     const {
       urlhost,
