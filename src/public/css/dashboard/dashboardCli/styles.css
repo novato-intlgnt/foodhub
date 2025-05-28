@@ -6,12 +6,48 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #ffeaea 0%, #fff5f5 50%, #ffdede 100%);
+
     background-attachment: fixed;
     min-height: 100vh;
     transition: background 0.5s ease;
 }
+/* BUSCADOR */
 
+.buscador{
+    /* background: green; */
+    display: flex;
+    height: auto;
+    padding-left: 10%;
+    gap: 10px;
+    padding-top:40px ;
+}
+
+.barra_busqueda  button, input {
+    border-radius: 10px;
+    border: 2px solid #f4524c;
+    height: auto;
+}
+
+.barra_busqueda button {
+    background-color: #f4524c;
+    color: white;
+    padding: 10px;
+}
+.barra_busqueda input {
+    background-color: white;
+    width: 90%;
+    color: #f4524c;
+    padding: 10px;
+}
+.barra_busqueda{
+    /* background: #3498db; */
+    width: 50%;
+}
+
+.campanita {
+   /* background: black; */
+   margin-left: 40% ;
+}
 
 /* NAVBAR */
 nav {
@@ -65,7 +101,10 @@ nav p {
     margin-left: 100px; /* espacio para el nav */
     padding: 30px;
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
+    width: 100%;
+
     align-items: center;
 }
 
@@ -88,6 +127,14 @@ nav p {
 #contenedor-cartas a:hover {
     transform: scale(1.4);
 }
+#zona-cartas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    width: 100%;
+}
+
 
 /* CARTAS */
 .carta {
@@ -194,4 +241,48 @@ nav p {
     margin-top: 5px;
     display: flex;
     justify-content: space-between;
+}
+
+/* Contenedor */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Botón */
+.dropbtn {
+  background-color: #3498db;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Contenido oculto */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Muestra el contenido si tiene la clase 'show' */
+.show {
+  display: block;
 }

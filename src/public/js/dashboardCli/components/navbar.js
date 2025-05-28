@@ -3,7 +3,7 @@ export function createNavbar() {
   nav.innerHTML = `
     <ul>
       <li>
-        <a href="/"><img src="/assets/images/imgDashCli/user.png"></a>
+        <a href="dashboardCli.html"><img src="/assets/images/imgDashCli/user.png"></a>
         <p>Incio<p>
       </li>
       <li>

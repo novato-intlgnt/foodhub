@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pago</title>
+  <link rel="stylesheet" href="../../../css/dashboard/dashboardCli/pago.css" />
+  <link rel="stylesheet" href="../style/styles.css" />
+</head>
+<body>
+  <div class="formulario-pago">
+    <h1>Finalizar pago</h1>
+
+    <p id="resumen"></p>
+
+    <form id="form-pago">
+      <label for="metodo">Método de pago:</label>
+      <select id="metodo" required>
+        <option value="" disabled selected>Seleccionar</option>
+        <option value="yape">Yape</option>
+        <option value="tarjeta">Tarjeta</option>
+      </select>
+
+      <div id="campos-adicionales"></div>
+
+      <button type="submit">Confirmar pago</button>
+    </form>
+  </div>
+
+  <!-- ✅ Coloca aquí el script al final del body -->
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const producto = params.get("producto");
+    const tienda = params.get("tienda");
+    const precio = params.get("precio");
+
+    document.getElementById("resumen").textContent =
+      `Producto: ${producto} | Tienda: ${tienda} | Precio: S/. ${precio}`;
+
+    const metodo = document.getElementById("metodo");
+    const campos = document.getElementById("campos-adicionales");
+
+    metodo.addEventListener("change", () => {
+      campos.innerHTML = "";
+
+      if (metodo.value === "tarjeta") {
+        campos.innerHTML = `
+          <label for="num-tarjeta">Número de tarjeta:</label>
+          <input type="text" id="num-tarjeta" required maxlength="16" placeholder="0000 0000 0000 0000">
+
+          <label for="cvv">CVV:</label>
+          <input type="text" id="cvv" required maxlength="3" placeholder="123">
+        `;
+      }
+
+      if (metodo.value === "yape") {
+        campos.innerHTML = `
+          <p>Escanea el QR de Yape o paga al número:</p>
+          <h3>987 654 321</h3>
+        `;
+      }
+    });
+
+    //  Guardar en localStorage al confirmar pago
+    document.getElementById("form-pago").addEventListener("submit", e => {
+      e.preventDefault();
+
+      const nuevaCompra = {
+        fecha: new Date().toISOString().split("T")[0],
+        producto: producto,
+        precio: parseFloat(precio)
+      };
+
+      const compras = JSON.parse(localStorage.getItem("compras")) || [];
+      compras.push(nuevaCompra);
+      localStorage.setItem("compras", JSON.stringify(compras));
+
+      alert("¡Pago confirmado con éxito!");
+
+      // Redirigir al main
+      window.location.href = "../../../dashboardCli.html";
+    });
+  </script>
+</body>
+</html>
