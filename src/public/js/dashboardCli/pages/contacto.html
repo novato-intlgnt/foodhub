@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="../../../css/dashboard/dashboardCli/styles.css">
+
+  <title>¿Quiénes somos?</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #fff8f7; /* Fondo clarito con toque cálido */
+      color: #444;
+    }
+
+    .contenido {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-top: 5px solid #f5544d;
+    }
+
+    .contenido h1 {
+      text-align: center;
+      color: #f5544d;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .contenido p.intro {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
+    .cotenedor {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .cotenedor img {
+      width: 180px;
+      border-radius: 50%;
+      border: 4px solid #f5544d;
+      margin-bottom: 15px;
+    }
+
+    .cotenedor p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      padding: 0 20px;
+    }
+
+    .ventajas {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ventaja {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #fff0ee;
+      padding: 15px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 700px;
+      border-left: 6px solid #f5544d;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .ventaja:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .ventaja img {
+      width: 100px;
+      height: auto;
+      border-radius: 8px;
+      border: 2px solid #f5544d;
+      background: white;
+    }
+
+    .ventaja p {
+      font-size: 1rem;
+      flex: 1;
+    }
+
+    .maps {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .maps h2 {
+      margin-bottom: 10px;
+      color: #f5544d;
+    }
+
+    .maps iframe {
+      width: 100%;
+      max-width: 700px;
+      height: 400px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #f5544d;
+      color: #fff;
+      margin-top: 40px;
+      font-weight: bold;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <script type="module">
+    import { createNavbar } from '../components/navbar.js';
+
+    // Crea el navbar y lo agrega al body
+    const nav = createNavbar();
+    document.body.prepend(nav);
+  </script>
+
+  <div class="contenido">
+    <h1>¿Quiénes somos?</h1>
+    <p class="intro">Si eres un cachimbo y te gustaría saber más de tu universidad (UNSA), este es el momento. Con <strong>Salsera</strong> conocerás de manera interactiva y divertida tu campus, ¡todo al alcance de tu mano!</p>
+
+    <div class="cotenedor">
+      <img src="gato.png" alt="Mascota UNSA">
+    </div>
+
+    <div class="ventajas">
+      <div class="ventaja">
+        <img src="../../../assets/images/imgDashCli/v1.png" alt="Evita colas">
+        <p>Evita las colas largas y las incomodidades de las aglomeraciones.</p>
+      </div>
+      <div class="ventaja">
+        <img src="../../../assets/images/imgDashCli/v2.png" alt="Paga seguro">
+        <p>Paga con seguridad y confianza gracias al método organizado de Salsera.</p>
+      </div>
+      <div class="ventaja">
+        <img src="../../../assets/images/imgDashCli/v3.png" alt="Explora UNSA">
+        <p>Conoce todo de tu universidad desde un solo punto.</p>
+      </div>
+    </div>
+
+    <div class="maps">
+      <h2>¿Dónde estamos?</h2>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d239.21275047668243!2d-71.52478828708922!3d-16.404295421827563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2spe!4v1748408987292!5m2!1ses!2spe" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Salsera - Todos los derechos reservados.
+  </footer>
+</body>
+</html>
