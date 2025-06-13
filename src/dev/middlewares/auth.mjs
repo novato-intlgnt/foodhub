@@ -24,7 +24,6 @@ function onlyUser(req, res, next) {
       return res.redirect('/');
     }
 
-    // Adjuntar info al request (opcional: body o user)
     req.user = {
       name: decoded.name,
       role: decoded.role
@@ -39,31 +38,34 @@ function onlyUser(req, res, next) {
 }
 
 
-// function userSong (req, res, next) {
-//   try {
-//     const cookieJwt = req.headers.cookie?.split('; ').find(cookie => cookie.startsWith('user='))
-//
-//     if (!cookieJwt) {
-//       return res.redirect('/')
-//     }
-//
-//     const cookieVerified = jwt.verify(cookieJwt.slice(5), process.env.JWT_SECRET)
-//
-//     if (cookieVerified && Object.keys(cookieVerified).length === 3) {
-//       const name = cookieVerified.name
-//       req.body = {
-//         user: name
-//       }
-//       next()
-//     } else {
-//       return res.redirect('/')
-//     }
-//   } catch (error) {
-//     console.error('Error in userSong middleware:', error)
-//     return res.redirect('/')
-//   }
-// }
+function userData (req, res, next) {
+  try {
+    const cookieJwt = req.headers.cookie?.split('; ').find(cookie => cookie.startsWith('user='))
+
+    if (!cookieJwt) {
+      return res.redirect('/')
+    }
+
+    const cookieVerified = jwt.verify(cookieJwt.slice(5), process.env.JWT_SECRET)
+
+    if (cookieVerified && Object.keys(cookieVerified).length === 4) {
+      console.log(cookieVerified)
+      const name = cookieVerified.name
+      const role = cookieVerified.role
+      req.body = {
+        user: name,
+        role: role
+      }
+      next()
+    } else {
+      return res.redirect('/')
+    }
+  } catch (error) {
+    console.error('Error in userSong middleware:', error)
+    return res.redirect('/')
+  }
+}
 export const METHODS = {
-  onlyUser
-  // userSong
+  onlyUser,
+  userData
 }

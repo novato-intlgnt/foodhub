@@ -1,32 +1,56 @@
-import z from 'zod'
+import { z } from 'zod'
 
-const userSchema = z.object({
+const nameField = (fieldName) =>
+  z.string({
+    invalid_type_error: `${fieldName} must be a string`,
+    required_error: `${fieldName} is required`
+  })
+
+const passwordSchema = z.string()
+  .min(8, { message: 'The password must contain at least 8 characters' })
+  .refine((val) => /\d/.test(val), {
+    message: 'The password must contain at least one number'
+  })
+  .refine((val) => /[A-Z]/.test(val), {
+    message: 'The password must contain at least one capital letter'
+  })
+
+const phoneSchema = z.number()
+  .min(900000000, { message: 'The telephone number must have 9 digits' })
+  .max(999999999)
+
+const baseUserSchema = z.object({
   urlhost: z.string().url(),
-  user: z.string({
-    invalid_type_error: 'Name user must be a string',
-    required_error: 'Name user is required'
-  }),
-  name: z.string({
-    invalid_type_error: 'First Name must be a string',
-    required_error: 'Name user is required'
-  }),
-  lastName: z.string({
-    invalid_type_error: 'Last name must be a string',
-    required_error: 'Name user is required'
-  }),
-  email: z.string().email(),
-  phone: z.number().min(900000000, { message: 'The telephone number must be have 9 digits' }).max(1000000000),
-  pass: z
-    .string().min(8, { message: 'The password must contain at least 8 characters' })
-    .refine((pass) => /\d/.test(pass), { message: 'The password must contain at least one number' })
-    .refine((pass) => /[A-Z]/.test(pass), { message: 'The password msut contain at least one capital letter' }),
-  role: z.string(),
+  user: nameField('User'),
+  email: z.string().email({ message: 'Invalid email address' }),
+  phone: phoneSchema,
+  pass: passwordSchema,
 })
+
+const clientSchema = z.object({
+  role: z.literal('client'),
+  name: nameField('First Name'),
+  lastName: nameField('Last Name'),
+})
+
+const stallSchema = z.object({
+  role: z.literal('stall'),
+  stallId: z.string({ required_error: 'Stall ID is required' }),
+  area: z.enum(['engineering', 'social', 'biomedical'], {
+    errorMap: () => ({ message: 'Area must be include in the UNSA'})
+  }),
+  place: nameField('Place stall')
+})
+
+const userSchema = z.discriminatedUnion('role', [
+  baseUserSchema.merge(clientSchema),
+  baseUserSchema.merge(stallSchema)
+])
 
 export function validateUser (object) {
   return userSchema.safeParse(object)
 }
 
 export function validatePartialUser (object) {
-  return userSchema.partial().safeParse(object)
+  return baseUserSchema.partial().safeParse(object)
 }

@@ -14,7 +14,7 @@ export class UserController {
 
   create = async (req, res) => {
     try {
-      const result = validatePartialUser(req.body)
+      const result = validateUser(req.body)
       console.log(req.body)
       console.log('------------')
       console.log(result.data)
@@ -56,6 +56,7 @@ export class UserController {
         return res.redirect('/')
       }
       const isVerify = await this.userModel.verify({ input: req.params.token })
+      console.log(isVerify)
       if (isVerify === true) {
         return res.status(400).json({ status: 'Error', message: 'There is some problem with the token' }).redirect('/')
       }
@@ -64,7 +65,6 @@ export class UserController {
       }
       if (Object.keys(isVerify).length === 3) {
         const { auth, cookie, user } = isVerify
-        console.log(isVerify)
         res.cookie('user', auth, cookie)
         return res.redirect(`${user}/dashboard`)
       }
@@ -101,7 +101,7 @@ export class UserController {
    }
 
   access = async (req, res) => {
-    if (req.user.role == 'admin' || req.user.role == 'employee') {
+    if (req.user.role == 'stall') {
       return res.sendFile(path.join(__dirname, 'public', 'dashboard.html'))
     } else if(req.user.role == 'client') {
       return res.sendFile(path.join(__dirname, 'public', 'dashboardCli.html'))

@@ -1,7 +1,7 @@
 import { createNavbar } from "./components/navbar.js";
 import { createCard, createCard_1 } from "./components/card.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   // Generar el navbar
   document.body.prepend(createNavbar());
 
@@ -35,6 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleBtn.textContent = visible ? "Ocultar movimientos" : "Mostrar movimientos";
   });
 
+  const url = window.location.origin
+
+  const res = await fetch(`${url}/stall/products/`, {
+    method: 'GET'
+  })
   // Cargar compras.json y generar la lista de movimientos
   fetch("/js/dashboardCli/compras.json")
     .then(res => res.json())

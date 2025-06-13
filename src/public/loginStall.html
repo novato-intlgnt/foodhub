@@ -5,16 +5,13 @@
     <link rel="shortcut icon" href="assets/icons/favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css"
-    />
-    <link rel="stylesheet" href="css/loginStail-styles.css" />
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel="stylesheet" href="css/loginStall-styles.css" />
     <link rel="stylesheet" href="css/particles.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <script src="js/particles02.js" defer></script>
     <script src="js/particles_app.js" defer></script>
-    <script src="js/loginStail-script.js" defer></script>
+    <script src="js/loginStall-script.js" defer></script>
   </head>
   <body>
     <div class="container">
@@ -22,7 +19,6 @@
       <div class="forms-container">
         <div class="signin-signup">
           <form id="btn-singin" class="sign-in-form">
-            <!-- <form id="btn-singin" class="sign-in-form" method="POST"> -->
             <h2 class="title">Sign in</h2>
             <div id="demail" class="input-field">
               <i class="fi fi-rr-envelope"></i>
@@ -84,6 +80,53 @@
                 autocomplete="off"
                 name="email"
                 id="email"
+                required
+              />
+            </div>
+            <div class="input-field">
+              <i class="fi fi-rr-phone-call"></i>
+              <label for="phone" class="sr-only">Telefono</label>
+              <input
+                type="text"
+                placeholder="Telefono"
+                autocomplete="off"
+                name="phone"
+                required
+              />
+            </div>
+            <div class="input-field">
+              <i class="fi fi-rr-id-badge"></i>
+              <label for="nmro" class="sr-only">Nmro</label>
+              <input
+              <input
+                type="text"
+                placeholder="Nmro"
+                autocomplete="off"
+                name="nmro"
+                id="nmro"
+                required
+              />
+            </div>
+            <div id="darea" class="input-field select-field">
+              <i id="i-area" class="fi fi-rr-school"></i>
+              <label for="area" class="sr-only">Área</label>
+              <select name="area" id="area" required>
+                <option value="" disabled selected hidden>Área</option>
+                <option value="engineering">Ingenierías</option>
+                <option value="social">Sociales</option>
+                <option value="biomedical">Biomédicas</option>
+              </select>
+            </div>
+            <div class="input-field">
+              <i class="fi fi-rr-marker"></i>
+              <label for="place" class="sr-only">Ubicación</label>
+              <input
+              <input
+                type="text"
+                placeholder="Ubicacion"
+                autocomplete="off"
+                name="place"
+                id="place"
                 required
               />
             </div>

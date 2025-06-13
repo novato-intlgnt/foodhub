@@ -8,8 +8,8 @@ export const userRouter = ({ userModel, emailService }) => {
 
   const userController = new UserController({ userModel, emailService })
 
-  userRouter.post('/stail/signup', assignRole('admin'), userController.create)
-  userRouter.post('/stail/signin', userController.auth)
+  userRouter.post('/stall/signup', assignRole('stall'), userController.create)
+  userRouter.post('/stall/signin', userController.auth)
 
   userRouter.post('/client/signup', assignRole('client'), userController.create)
   userRouter.post('/client/signin', userController.auth)

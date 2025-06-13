@@ -145,6 +145,86 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+.input-field select {
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--color-text);
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  padding-right: 20px;
+}
+
+.input-field select option[disabled] {
+  color: var(--color-background);
+  font-weight: 500;
+}
+
+.input-field select option {
+  background-color: white;
+  color: #333;
+  font-weight: 500;
+  padding: 10px;
+}
+
+.input-field select::-ms-expand {
+  display: none;
+}
+
+.input-field:has(select)::after {
+  content: "\25BC";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-icon);
+  pointer-events: none;
+  font-size: 1.1rem;
+}
+
+.input-field.select-field::after {
+  content: "\25BC";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-icon);
+  pointer-events: none;
+  font-size: 1.1rem;
+}
+
+.input-field {
+  position: relative;
+}
+
+.input-field select:focus {
+  color: var(--color-text);
+}
+
+.input-field select:hover {
+  color: var(--color-text);
+}
+
+.input-field select:valid {
+  color: var(--color-text);
+}
+
+.input-field:has(select:focus)::after,
+.input-field.select-field:focus-within::after {
+  transform: translateY(-50%) rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+.input-field select option:checked {
+  background: blue;
+  color: white;
+}
 .social-text {
   padding: 0.4rem 0;
   font-size: 1rem;

@@ -27,8 +27,8 @@
     }
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./src/server.mjs"
+    "dev": "node --watch ./src/server.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",

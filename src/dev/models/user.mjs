@@ -20,7 +20,6 @@ export class UserModel {
       );
 
       if (rows.length === 0) {
-        // Crear el JWT
         const verifyToken = jwt.sign(
           { name: user, mail: email },
           process.env.JWT_SECRET,
@@ -36,7 +35,6 @@ export class UserModel {
         return result;
       }
 
-      // Si ya existe, puedes devolver un error o true
       return true;
     } catch (error) {
       console.error('Error in checking:', error);
@@ -53,8 +51,8 @@ export class UserModel {
 
       if (role === 'client') {
         await this._createClient({ input, client });
-      } else if (role === 'admin' || role === 'employee') {
-        await this._createWorker({ input, client });
+      } else if (role === 'stall') {
+        await this._createStall({ input, client });
       } else {
         throw new Error('Invalid role');
       }
@@ -100,8 +98,8 @@ export class UserModel {
     ]);
   }
 
-  static async _createWorker({ input, client }) {
-    const { email, user, pass, role } = input;
+  static async _createStall({ input, client }) {
+    const { email, user, phone, pass, role, area, stallId, place } = input;
 
     const salt = await bcryptjs.genSalt(7);
     const hashPass = await bcryptjs.hash(pass, salt);
@@ -112,8 +110,8 @@ export class UserModel {
         VALUES ($1, $2, $3, NOW(), $4, $5, $6)
         RETURNING user_id
       )
-      INSERT INTO workers (worker_id, hire_date, is_active)
-      SELECT user_id, NOW(), $7 FROM new_user;
+      INSERT INTO stalls (stall_id, num_id, location, phone, facultie)
+      SELECT user_id, $7, $8, $9, $10 FROM new_user;
     `, [
       email,
       user,
@@ -121,7 +119,10 @@ export class UserModel {
       false,           // is_verified
       'inActive',
       role,
-      false
+      stallId,
+      place,
+      phone,
+      area
     ]);
   }
 
@@ -293,10 +294,11 @@ export class UserModel {
 
       // Opciones de cookie
       const cookieOption = {
-        maxAge: parseInt(process.env.JWT_COOKIE_EXPIRATION) * 24 * 60 * 60 * 1000, // en ms
+        maxAge: parseInt(process.env.JWT_COOKIE_EXPIRATION) * 24 * 60 * 60 * 1000,
         path: '/',
-        httpOnly: true,     // evita acceso desde JS (más seguro)
-        secure: true         // asegura que solo se envíe por HTTPS
+        httpOnly: true,
+        secure: true,
+        sameSite: 'strict'
       };
 
       return { auth: token, cookie: cookieOption, name, role };

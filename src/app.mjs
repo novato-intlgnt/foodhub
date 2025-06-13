@@ -2,8 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import { userRouter } from './dev/routes/user.mjs'
-import { workerRouter } from './dev/routes/worker.mjs'
-import { stailRouter } from './dev/routes/stail.mjs'
+import { stallRouter } from './dev/routes/stall.mjs'
 import { clientRouter } from './dev/routes/client.mjs'
 
 // Fix to __dirname in module scope
@@ -11,7 +10,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-export const createApp = ({ emailService, userModel, workerModel, stailModel, clientModel}) => {
+export const createApp = ({ emailService, userModel, stallModel, clientModel}) => {
   const app = express()
   const PORT = process.env.PORT ?? 4000
 
@@ -37,8 +36,7 @@ export const createApp = ({ emailService, userModel, workerModel, stailModel, cl
     res.sendFile(path.join(__dirname, 'public', '/dash/dashboardtienda.html'))
   })
   app.use('/user', userRouter({ userModel, emailService }))
-  app.use('/worker', workerRouter({ workerModel }))
-  app.use('/stail', stailRouter({ stailModel }))
+  app.use('/stall', stallRouter({ stallModel }))
   app.use('/client', clientRouter({ clientModel }))
 
   app.listen(PORT, () => {
