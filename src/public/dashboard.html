@@ -1,122 +1,234 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard de Tienda</title>
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="dashboardnew.css">
-</head>
-<body>
-  <aside class="sidebar">
-    <div class="nav-group">
-      <button class="nav-btn" data-target="section-register" title="Registrar Pedido"><i class='bx bx-edit'></i></button>
-      <button class="nav-btn" data-target="section-add-product" title="Añadir Producto"><i class='bx bx-plus-circle'></i></button>
-      <button class="nav-btn" data-target="section-orders" title="Registros del Día"><i class='bx bx-list-ul'></i></button>
-    </div>
-    <button class="nav-btn" id="signOutBtn" title="Cerrar Sesión"><i class='bx bx-log-out'></i></button>
-  </aside>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard de Tienda</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/dashboard/dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="/js/dashboard/dashboard.js" defer></script>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="nav-group">
+        <button
+          class="nav-btn"
+          data-target="section-register"
+          title="Registrar Pedido"
+        >
+          <i class="bx bx-edit"></i>
+        </button>
+        <button
+          class="nav-btn"
+          data-target="section-add-product"
+          title="Añadir Producto"
+        >
+          <i class="bx bx-plus-circle"></i>
+        </button>
+        <button
+          class="nav-btn"
+          data-target="section-orders"
+          title="Registros del Día"
+        >
+          <i class="bx bx-list-ul"></i>
+        </button>
+      </div>
+      <button class="nav-btn" id="signOutBtn" title="Cerrar Sesión">
+        <i class="bx bx-log-out"></i>
+      </button>
+    </aside>
 
-  <div class="sections">
-    <!-- Registrar Pedido -->
-    <section id="section-register">
-      <div class="content">
-        <div class="form-container">
-          <h2>Registrar Pedido</h2>
-          <div class="row">
-            <div class="col"><label>Fecha</label><input type="date" id="orderDate"></div>
-            <div class="col"><label>Nro de pedido</label><input type="text" id="orderNumber" readonly></div>
-          </div>
-          <div class="row">
-            <div class="col"><label>Cliente</label><input type="text" id="clientName" value="Varios" readonly></div>
-            <div class="col">
-              <label>Modo de pago</label>
-              <select id="paymentMode" autocomplete="off">
-                <option value="" disabled selected>Seleccione modo de pago</option>
-                <option value="Efectivo">Efectivo</option>
-                <option value="Yape">Yape</option>
+    <div class="sections">
+      <!-- Registrar Pedido -->
+      <section id="section-register">
+        <div class="content">
+          <div class="form-container">
+            <h2>Registrar Pedido</h2>
+            <div class="row">
+              <div class="col">
+                <label>Fecha</label><input type="date" id="orderDate" />
+              </div>
+              <div class="col">
+                <label>Nro de pedido</label
+                ><input type="text" id="orderNumber" readonly />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label>Cliente</label
+                ><input type="text" id="clientName" value="Varios" readonly />
+              </div>
+              <div class="col">
+                <label>Modo de pago</label>
+                <select id="paymentMode" autocomplete="off">
+                  <option value="" disabled selected>
+                    Seleccione modo de pago
+                  </option>
+                  <option value="Efectivo">Efectivo</option>
+                  <option value="Yape">Yape</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="product-inputs">
+              <select id="orderProdCategory">
+                <option value="" disabled selected>Seleccione categoría</option>
               </select>
+              <input
+                list="productsList"
+                id="orderProdName"
+                placeholder="Producto"
+              />
+              <datalist id="productsList"></datalist>
+              <input
+                type="number"
+                id="orderProdQuantity"
+                placeholder="Cantidad"
+              />
+              <input
+                type="number"
+                id="orderProdUnitPrice"
+                placeholder="P. unidad"
+                readonly
+              />
+              <input
+                type="text"
+                id="orderProdTotal"
+                placeholder="Total"
+                readonly
+              />
+            </div>
+            <div class="table-container">
+              <h3>Productos en el Pedido</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th>Cant</th>
+                    <th>P.unit</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody id="orderProductsBody"></tbody>
+              </table>
+            </div>
+            <div class="actions">
+              <button class="btn-secondary" id="addOrderProdBtn">
+                Agregar Producto
+              </button>
+              <button class="btn-primary" id="saveOrderBtn">
+                Guardar Pedido
+              </button>
             </div>
           </div>
-          
-          <div class="product-inputs">
-            <select id="orderProdCategory">
-              <option value="" disabled selected>Seleccione categoría</option>
-            </select>
-            <input list="productsList" id="orderProdName" placeholder="Producto">
-            <datalist id="productsList"></datalist>
-            <input type="number" id="orderProdQuantity" placeholder="Cantidad">
-            <input type="number" id="orderProdUnitPrice" placeholder="P. unidad" readonly>
-            <input type="text" id="orderProdTotal" placeholder="Total" readonly>
-          </div>
           <div class="table-container">
-            <h3>Productos en el Pedido</h3>
+            <h2>Pedidos Pendientes</h2>
             <table>
-              <thead><tr><th>Producto</th><th>Cant</th><th>P.unit</th><th>Total</th></tr></thead>
-              <tbody id="orderProductsBody"></tbody>
+              <thead>
+                <tr>
+                  <th>Nro Pedido</th>
+                  <th>Producto</th>
+                </tr>
+              </thead>
+              <tbody id="pendingOrdersBody"></tbody>
             </table>
           </div>
-          <div class="actions">
-            <button class="btn-secondary" id="addOrderProdBtn">Agregar Producto</button>
-            <button class="btn-primary" id="saveOrderBtn">Guardar Pedido</button>
+        </div>
+      </section>
+
+      <!-- Añadir Producto -->
+      <section id="section-add-product">
+        <div class="content">
+          <div class="table-container">
+            <h2>Productos Agregados</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Categoría</th>
+                  <th>Precio</th>
+                  <th>Stock</th>
+                </tr>
+              </thead>
+              <tbody id="addedProductsBody"></tbody>
+            </table>
+          </div>
+          <div class="form-container">
+            <h2>Añadir Producto</h2>
+            <form id="prod-form">
+              <div class="row">
+                <input
+                  type="text"
+                  id="prodName"
+                  name="nameProd"
+                  placeholder="Producto"
+                />
+                <input
+                  type="text"
+                  id="prodDesc"
+                  name="descProd"
+                  placeholder="Descripción"
+                />
+                <select id="prodCategory" name="catProd">
+                  <option value="" disabled selected>
+                    Seleccione categoría
+                  </option>
+                </select>
+                <input
+                  type="number"
+                  id="prodPrice"
+                  name="salePriceProd"
+                  placeholder="Precio(Venta)"
+                  step="0.1"
+                />
+                <input
+                  type="number"
+                  name="boughtPriceProd"
+                  placeholder="Costo(Compra)"
+                  step="0.1"
+                />
+                <input
+                  type="number"
+                  id="prodStock"
+                  name="stockProd"
+                  placeholder="Stock"
+                  min="0"
+                />
+              </div>
+              <div class="actions">
+                <button type="submit" class="btn-secondary" id="addProductBtn">
+                  Agregar
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-        <div class="table-container">
-          <h2>Pedidos Pendientes</h2>
-          <table>
-            <thead><tr><th>Nro Pedido</th><th>Producto</th></tr></thead>
-            <tbody id="pendingOrdersBody"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Añadir Producto -->
-    <section id="section-add-product">
-      <div class="content">
-        <div class="table-container">
-          <h2>Productos Agregados</h2>
-          <table>
-            <thead><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock</th></tr></thead>
-            <tbody id="addedProductsBody"></tbody>
-          </table>
-        </div>
-        <div class="form-container">
-          <h2>Añadir Producto</h2>
-          <div class="row">
-            <input type="text" id="prodName" placeholder="Producto">
-            <select id="prodCategory">
-              <option value="" disabled selected>Seleccione categoría</option>
-              <option value="Bebidas">Bebidas</option>
-              <option value="Sandwiches">Sandwiches</option>
-              <option value="Almuerzos">Almuerzos</option>
-              <option value="Galletas y otros">Galletas y otros</option>
-            </select>
-            <input type="number" id="prodPrice" placeholder="Precio">
-            <input type="number" id="prodStock" placeholder="Stock">
-          </div>
-          <div class="actions">
-            <button class="btn-secondary" id="addProductBtn">Agregar</button>
+      <!-- Registros del Día -->
+      <section id="section-orders">
+        <div class="content" style="width: 100%">
+          <div class="table-container">
+            <h2>Registro de Pedidos del Día</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nro Pedido</th>
+                  <th>Producto</th>
+                  <th>Cant</th>
+                  <th>Total</th>
+                  <th>Modo Pago</th>
+                </tr>
+              </thead>
+              <tbody id="dailyRecordsBody"></tbody>
+            </table>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Registros del Día -->
-    <section id="section-orders">
-      <div class="content" style="width:100%;">
-        <div class="table-container">
-          <h2>Registro de Pedidos del Día</h2>
-          <table>
-            <thead><tr><th>Nro Pedido</th><th>Producto</th><th>Cant</th><th>Total</th><th>Modo Pago</th></tr></thead>
-            <tbody id="dailyRecordsBody"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-  </div>
-<script src="dasboardnew.js"></script>
-</body>
-
+      </section>
+    </div>
+  </body>
 </html>
-

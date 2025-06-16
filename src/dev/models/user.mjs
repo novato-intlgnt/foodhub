@@ -184,7 +184,6 @@ export class UserModel {
   
   static async verify({ input }) {
     try {
-      // 1. Decodificar token
       const decoder = jwt.verify(input, process.env.JWT_SECRET);
       if (!decoder || !decoder.name || !decoder.mail) return true;
 
@@ -192,7 +191,6 @@ export class UserModel {
       const client = await pool.connect();
 
       try {
-        // 2. Verificar si el usuario existe
         const result = await client.query(
           'SELECT user_id, is_verified, role FROM users WHERE name = $1 AND email = $2',
           [name, mail]
@@ -202,19 +200,15 @@ export class UserModel {
 
         const { user_id, is_verified, role } = result.rows[0];
 
-        // 3. Si ya está verificado, retornar éxito
         if (is_verified) return 1;
 
-        // 4. Iniciar transacción
         await client.query('BEGIN');
 
-        // 5. Marcar usuario como verificado
         await client.query(
           'UPDATE users SET is_verified = true WHERE user_id = $1',
           [user_id]
         );
 
-        // 6. Activar según rol
         if (role === 'employee' || role === 'admin') {
           await client.query(
             'UPDATE workers SET is_active = true WHERE worker_id = $1',
@@ -222,10 +216,8 @@ export class UserModel {
           );
         }
 
-        // 7. Confirmar cambios
         await client.query('COMMIT');
 
-        // 8. Generar nuevo token
         const token = jwt.sign(
           { user: name, role: role },
           process.env.JWT_SECRET,

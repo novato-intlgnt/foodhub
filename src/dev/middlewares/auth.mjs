@@ -42,24 +42,23 @@ function userData (req, res, next) {
   try {
     const cookieJwt = req.headers.cookie?.split('; ').find(cookie => cookie.startsWith('user='))
 
-    if (!cookieJwt) {
-      return res.redirect('/')
-    }
+    if (!cookieJwt) return res.redirect('/')
 
+
+    const userBody = { ...req.body }
     const cookieVerified = jwt.verify(cookieJwt.slice(5), process.env.JWT_SECRET)
 
-    if (cookieVerified && Object.keys(cookieVerified).length === 4) {
-      console.log(cookieVerified)
-      const name = cookieVerified.name
-      const role = cookieVerified.role
-      req.body = {
-        user: name,
-        role: role
-      }
-      next()
-    } else {
-      return res.redirect('/')
+    if (!cookieVerified && Object.keys(cookieVerified).length === 4) return res.redirect('/')
+
+    const aditionalData = {
+      user: cookieVerified.name,
+      role: cookieVerified.role
     }
+    req.body = {
+      ...userBody,
+      ...aditionalData
+    }
+    next()
   } catch (error) {
     console.error('Error in userSong middleware:', error)
     return res.redirect('/')
