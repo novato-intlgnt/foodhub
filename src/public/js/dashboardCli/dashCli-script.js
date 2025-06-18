@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Cargar compras.json y generar la lista de movimientos
-  fetch("js/dashboardCli/compras.json")
+  fetch("/js/dashboardCli/compras.json")
     .then(res => res.json())
     .then(data => {
       data.forEach(compra => {
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    fetch("js/dashboardCli/productos.json")
+    fetch("/js/dashboardCli/productos.json")
       .then(res => res.json())
       .then(data => {
         let resultados = [];

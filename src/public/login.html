@@ -9,18 +9,24 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
+    <script src="js/loginClient-script.js" defer></script>
   </head>
   <body>
     <div class="login-register-box">
       <div class="form-box login">
-        <form>
+        <form id="formSignIn">
           <h2>Sign in</h2>
           <div class="input-box">
-            <input type="email" placeholder="Email" required />
+            <input type="email" placeholder="Email" required name="email" />
             <i class="bx bx-envelope"></i>
           </div>
           <div class="input-box">
-            <input type="password" placeholder="Password" required />
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              name="pass"
+            />
             <i class="bx bxs-lock"></i>
           </div>
           <div class="remember">
@@ -28,7 +34,7 @@
             <a href="#">Forgot password?</a>
           </div>
           <button type="submit" class="btn">Sign in</button>
-          <a href="dashboardCli.html">Sign in</a>
+          <a href="">Sign in</a>
           <div class="register-link">
             <p>Don't have an account? <a href="#">Register</a></p>
           </div>
@@ -36,18 +42,45 @@
       </div>
 
       <div class="form-box register">
-        <form>
+        <form id="formSignUp">
           <h2>Register</h2>
           <div class="input-box">
-            <input type="text" placeholder="Name" required />
+            <input
+              type="text"
+              placeholder="Username"
+              required
+              name="user_name"
+            />
             <i class="bx bx-user"></i>
           </div>
           <div class="input-box">
-            <input type="email" placeholder="Email" required />
+            <input type="text" placeholder="Name" required name="name" />
+            <i class="bx bx-user"></i>
+          </div>
+          <div class="input-box">
+            <input
+              type="text"
+              placeholder="Last name"
+              required
+              name="last_name"
+            />
+            <i class="bx bx-user"></i>
+          </div>
+          <div class="input-box">
+            <input type="email" placeholder="Email" required name="email" />
             <i class="bx bx-envelope"></i>
           </div>
           <div class="input-box">
-            <input type="password" placeholder="Password" required />
+            <input type="text" placeholder="Phone" required name="phone" />
+            <i class="bx bxs-lock"></i>
+          </div>
+          <div class="input-box">
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              name="pass"
+            />
             <i class="bx bxs-lock"></i>
           </div>
           <button type="submit" class="btn">Register</button>

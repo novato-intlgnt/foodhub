@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <title>Mi Sitio Web</title>
     <link rel="stylesheet" href="css/dashboard/dashboardCli/styles.css" />
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
       rel="stylesheet"
@@ -12,12 +11,18 @@
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-straight/css/uicons-bold-straight.css'>
   </head>
   <body>
-    <div class="buscador" >
+    <div class="buscador">
       <div class="barra_busqueda">
-        <input type="text" id="busqueda" placeholder="introduce lo que deseas buscar">
-      <button id="btnBuscar">Buscar</button>
+        <input
+          type="text"
+          id="busqueda"
+          placeholder="introduce lo que deseas buscar"
+        />
+        <button id="btnBuscar">Buscar</button>
       </div>
-      <a class="campanita"><img  src="assets/campanita.png" alt="campanita" ></a>
+      <a class="campanita"
+        ><img src="assets/campanita.png" alt="campanita"
+      /></a>
     </div>
 
     <div id="contenedor-cartas">
@@ -25,15 +30,16 @@
         <!-- Aquí se insertarán las cartas dinámicamente -->
       </div>
 
-      
       <div class="movimientos">
-        <button class="desplegable" id="toggleMovimientos">Mostrar movimientos</button>
-        <div class="desplegable" id="listaMovimientos" style="display: none;">
+        <button class="desplegable" id="toggleMovimientos">
+          Mostrar movimientos
+        </button>
+        <div class="desplegable" id="listaMovimientos" style="display: none">
           <!-- Lista de movimientos para este punto -->
         </div>
       </div>
     </div>
 
-    <script type="module" src="js/dashboardCli/dashCli-script.js"></script>
+    <script type="module" src="/js/dashboardCli/dashCli-script.js"></script>
   </body>
 </html>

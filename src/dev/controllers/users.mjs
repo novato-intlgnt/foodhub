@@ -19,7 +19,6 @@ export class UserController {
       console.log('------------')
       console.log(result.data)
 
-      Object.assign(result.data, { role: "admin"})
       if (result.error) {
         return res.status(400).json({ error: JSON.parse(result.error.message), postMessage: req.body })
       }
@@ -37,7 +36,7 @@ export class UserController {
         }
         if (Object.keys(verifyEmail).length === 1) {
           const newData = { ...result.data }
-          const newUser = await this.userModel.createWorker({ input: newData })
+          const newUser = await this.userModel.create({ input: newData })
           if (newUser) {
             return res.status(201).send({ status: 'success', message: 'User successfully created, you only need to check your email address to verify your account' })
           } else {
@@ -102,6 +101,10 @@ export class UserController {
    }
 
   access = async (req, res) => {
-    return res.sendFile(path.join(__dirname, 'public', 'dashboard.html'))
+    if (req.user.role == 'admin' || req.user.role == 'employee') {
+      return res.sendFile(path.join(__dirname, 'public', 'dashboard.html'))
+    } else if(req.user.role == 'client') {
+      return res.sendFile(path.join(__dirname, 'public', 'dashboardCli.html'))
+    }
   }
 }
