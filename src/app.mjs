@@ -1,16 +1,32 @@
+// Core and Express modules
 import express from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+// Routers
 import { userRouter } from './dev/routes/user.mjs'
 import { stallRouter } from './dev/routes/stall.mjs'
 import { clientRouter } from './dev/routes/client.mjs'
 
-// Fix to __dirname in module scope
-import path from 'path'
-import { fileURLToPath } from 'url'
+// Monitoring
+import client from 'prom-client'
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-export const createApp = ({ emailService, userModel, stallModel, clientModel}) => {
+// Enable default system metrics collection
+client.collectDefaultMetrics()
+
+// Custom metric: total requests
+const httpRequestCounter = new client.Counter({
+  name: 'http_requests_total',
+  help: 'Total number of HTTP requests received',
+  labelNames: ['method', 'route', 'status']
+})
+
+// Create Express app with dependency injection
+export const createApp = ({ emailService, userModel, stallModel, clientModel }) => {
   const app = express()
   const PORT = process.env.PORT ?? 4000
 
@@ -21,25 +37,41 @@ export const createApp = ({ emailService, userModel, stallModel, clientModel}) =
   app.disable('x-powered-by')
   app.use(express.static(path.join(__dirname, 'public')))
 
-  app.get('/', (req, res) => {
+  // Metrics middleware
+  app.use((req, res, next) => {
+    res.on('finish', () => {
+      httpRequestCounter.labels(req.method, req.path, res.statusCode).inc()
+    })
+    next()
+  })
+
+  // Routes (frontend static)
+  app.get('/', (_, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
   })
-
-  app.get('/login', (req, res) => {
+  app.get('/login', (_, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'))
   })
-
-  app.get('/login/stail', (req, res) => {
+  app.get('/login/stail', (_, res) => {
     res.sendFile(path.join(__dirname, 'public', 'loginStail.html'))
   })
-  app.get('/dash', (req, res) => {
+  app.get('/dash', (_, res) => {
     res.sendFile(path.join(__dirname, 'public', '/dash/dashboardtienda.html'))
   })
+
+  // API Routes
   app.use('/user', userRouter({ userModel, emailService }))
   app.use('/stall', stallRouter({ stallModel }))
   app.use('/client', clientRouter({ clientModel }))
 
+  // Metrics endpoint (for Prometheus)
+  app.get('/metrics', async (req, res) => {
+    res.set('Content-Type', client.register.contentType)
+    res.end(await client.register.metrics())
+  })
+
+  // Start server
   app.listen(PORT, () => {
-    console.log(`server listening on port http://localhost:${PORT}`)
+    console.log(`✅ Server listening at http://localhost:${PORT}`)
   })
 }

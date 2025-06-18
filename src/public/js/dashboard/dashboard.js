@@ -192,8 +192,7 @@ document.getElementById('orderProdCategory').addEventListener('change', () => {
     .filter(([_, p]) => p.categoryId == cat && p.stock > 0)
     .forEach(([name, data]) => {
       const opt = document.createElement('option'); 
-      // opt.value = data.productId;
-      opt.value = name;
+      opt.value = data.productId;
       opt.textContent = name;
       prodList.appendChild(opt);
     });
