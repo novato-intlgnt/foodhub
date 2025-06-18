@@ -4,42 +4,72 @@
     <meta charset="UTF-8" />
     <title>Mi Sitio Web</title>
     <link rel="stylesheet" href="css/dashboard/dashboardCli/styles.css" />
-    <link
+    <!-- <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'> -->
+     <script type="module" src="./js/dashboardCli/dashCli-script.js" defer></script>
+     <script type="module" src="./js/dashboardCli/components/funciones.js" defer></script>
+
+    <!-- <link
       href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
       rel="stylesheet"
     />
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-straight/css/uicons-bold-straight.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-straight/css/uicons-bold-straight.css'> -->
   </head>
   <body>
-    <div class="buscador">
-      <div class="barra_busqueda">
-        <input
-          type="text"
-          id="busqueda"
-          placeholder="introduce lo que deseas buscar"
-        />
-        <button id="btnBuscar">Buscar</button>
+ <button>☰</button>
+  <nav>
+      <ul>
+          <li><a>Inicio</a></li>
+          <li><a>Contactanos</a></li>
+          <li><a>Salida</a></li>
+      </ul>
+  </nav>
+
+  <div class="general">
+    <div class="cuadro_estado">
+      <div class="search" id="search_prod">
+        <input id="busqueda" type="text" placeholder="Buscar Alimento... ">
       </div>
-      <a class="campanita"
-        ><img src="assets/campanita.png" alt="campanita"
-      /></a>
+      <div class="resultados" id="resultados"></div>
+      <div class="last_order" id="last_order"><h1>Ultimo pedido: </h1></div>
+      <div class="list_order">
+        <table>
+          <thead>
+            <tr>
+              <td><p>Producto</p></td>
+              <td><p>Fecha</p></td>
+              <td><p>Precio(S./)</p></td>
+            </tr>
+          </thead>
+          <tbody id="list_order_table"></tbody>
+        </table>
+      </div>
     </div>
 
-    <div id="contenedor-cartas">
-      <div id="zona-cartas">
-        <!-- Aquí se insertarán las cartas dinámicamente -->
-      </div>
-
-      <div class="movimientos">
-        <button class="desplegable" id="toggleMovimientos">
-          Mostrar movimientos
-        </button>
-        <div class="desplegable" id="listaMovimientos" style="display: none">
-          <!-- Lista de movimientos para este punto -->
-        </div>
-      </div>
+    <div class="factura" id="factura">
+      <p id="pedido_title">Pedidos: </p>
+      <table>
+        <thead>
+          <tr>
+            <td><p>Producto</p></td>
+            <td><p>Cantidad</p></td>
+            <td><p>Precio(s/.)</p></td>
+          </tr>
+        </thead>
+        <tbody id="tabla_pedidos"></tbody>
+      </table>
+      <button id="btn-pagar">Pagar</button>
     </div>
+  </div>
 
-    <script type="module" src="/js/dashboardCli/dashCli-script.js"></script>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <h2>Finalizar pago</h2>
+      <div class="opciones-pago">
+        <label><input type="radio" name="metodo" value="Yape" checked> Yape</label>
+        <label><input type="radio" name="metodo" value="Plin"> Plin</label>
+      </div>
+      <button id="btn-confirmar">Confirmar pago</button>
+    </div>
+  </div>
   </body>
 </html>
