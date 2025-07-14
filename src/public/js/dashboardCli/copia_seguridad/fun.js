@@ -31,27 +31,24 @@
     container.appendChild(tabla);
   }
 
-export function renderizarListaPedidos(lista, container) {
-  container.innerHTML = "";
-  lista.forEach(element => {
-    const tr = document.createElement("div");
-    tr.className = "tabla";
-    tr.innerHTML = `
-      <div>
-        <p>${element.nombre}</p>
-        <p>${element.fecha}</p>
-      </div>
-      <div><p>s/. ${element.precio.toFixed(2)}</p></div>
-    `;
-
-    const hr = document.createElement("hr");
-
-    // Insertar al inicio para que los más nuevos estén arriba
-    container.insertBefore(hr, container.firstChild);
-    container.insertBefore(tr, container.firstChild);
-  });
-}
-
+  export function renderizarListaPedidos(lista, container) {
+    container.innerHTML = "";
+    lista.forEach(element => {
+      const tr = document.createElement("div");
+      tr.className = "tabla"
+      tr.innerHTML = `
+        <div>
+          <p>${element.nombre}</p>
+          <p>${element.fecha}</p>
+        </div>
+        <div><p>s/. ${element.precio.toFixed(2)}<p></div>
+      `;
+      const hr = document.createElement("hr");
+      container.appendChild(tr);
+      container.appendChild(hr);
+      
+    });
+  }
 
   export function filtrar(texto, base) {
     const t = texto.toLowerCase();
