@@ -1,4 +1,5 @@
 // Core and Express modules
+import http from 'http'
 import express from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
@@ -10,24 +11,18 @@ import { userRouter } from './dev/routes/user.mjs'
 import { stallRouter } from './dev/routes/stall.mjs'
 import { clientRouter } from './dev/routes/client.mjs'
 
+import { initSocket } from './dev/sockets/io.mjs' 
+
 // Monitoring
-import client from 'prom-client'
+import { httpRequestCounter, register } from './dev/metrics/metrics.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-// Enable default system metrics collection
-client.collectDefaultMetrics()
-
-// Custom metric: total requests
-const httpRequestCounter = new client.Counter({
-  name: 'http_requests_total',
-  help: 'Total number of HTTP requests received',
-  labelNames: ['method', 'route', 'status']
-})
-
 // Create Express app with dependency injection
-export const createApp = ({ emailService, userModel, stallModel, clientModel }) => {
+export const createApp = ({ emailService, userModel, stallModel, clientModel, orderModel }) => {
   const app = express()
+  const server = http.createServer(app)
+  const io = initSocket(server, orderModel)
   const PORT = process.env.PORT ?? 4000
 
   // Middlewares
@@ -66,12 +61,15 @@ export const createApp = ({ emailService, userModel, stallModel, clientModel }) 
 
   // Metrics endpoint (for Prometheus)
   app.get('/metrics', async (req, res) => {
-    res.set('Content-Type', client.register.contentType)
-    res.end(await client.register.metrics())
+    res.set('Content-Type', register.contentType)
+    res.end(await register.metrics())
   })
 
-  // Start server
-  app.listen(PORT, () => {
+  // Start server with WebSocket support
+  server.listen(PORT, () => {
     console.log(`✅ Server listening at http://localhost:${PORT}`)
+    console.log(`✅ WebSocket server ready at ws://localhost:${PORT}`)
   })
+
+  return { app, server, io } // Return io instance for further use
 }

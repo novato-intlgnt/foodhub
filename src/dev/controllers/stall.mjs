@@ -1,11 +1,5 @@
 import { validatePartialProduct, validateProduct } from '../schemes/productScheme.mjs'
 
-// Fix to __dirname in module scope
-import path from 'path'
-import { fileURLToPath } from 'url'
-const cwd = path.dirname(fileURLToPath(import.meta.url))
-const __dirname = path.resolve(cwd, '..', '..')
-
 export class StallController {
   constructor ({ stallModel }) {
     this.stallModel = stallModel

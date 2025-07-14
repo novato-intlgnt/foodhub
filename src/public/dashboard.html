@@ -10,6 +10,7 @@
     />
     <link rel="stylesheet" href="/css/dashboard/dashboard.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="/socket.io/socket.io.js" defer></script>
     <script src="/js/dashboard/dashboard.js" defer></script>
   </head>
   <body>
@@ -46,29 +47,32 @@
       <!-- Registrar Pedido -->
       <section id="section-register">
         <div class="content">
-          <div class="form-container">
+          <form id="order-form" class="form-container">
             <h2>Registrar Pedido</h2>
             <div class="row">
-              <div class="col">
-                <label>Fecha</label><input type="date" id="orderDate" />
-              </div>
-              <div class="col">
-                <label>Nro de pedido</label
-                ><input type="text" id="orderNumber" readonly />
-              </div>
+              <!-- <div class="col"> -->
+              <!--   <label>Fecha</label><input type="date" id="orderDate" /> -->
+              <!-- </div> -->
             </div>
             <div class="row">
               <div class="col">
                 <label>Cliente</label
-                ><input type="text" id="clientName" value="Varios" readonly />
+                ><input
+                  name="clientName"
+                  type="text"
+                  id="clientName"
+                  value="Varios"
+                  readonly
+                />
               </div>
               <div class="col">
                 <label>Modo de pago</label>
-                <select id="paymentMode" autocomplete="off">
-                  <option value="" disabled selected>
+                <select id="paymentMode" name="payMethod" autocomplete="off">
+                  <option value="" disabled selected hide>
                     Seleccione modo de pago
                   </option>
                   <option value="Efectivo">Efectivo</option>
+                  <option value="Plin">Plin</option>
                   <option value="Yape">Yape</option>
                 </select>
               </div>
@@ -117,14 +121,14 @@
               </table>
             </div>
             <div class="actions">
-              <button class="btn-secondary" id="addOrderProdBtn">
+              <button type="button" class="btn-secondary" id="addProdBtn">
                 Agregar Producto
               </button>
-              <button class="btn-primary" id="saveOrderBtn">
+              <button type="submit" class="btn-primary" id="saveOrderBtn">
                 Guardar Pedido
               </button>
             </div>
-          </div>
+          </form>
           <div class="table-container">
             <h2>Pedidos Pendientes</h2>
             <table>

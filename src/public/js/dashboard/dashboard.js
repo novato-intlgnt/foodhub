@@ -14,11 +14,12 @@ const url = window.location.origin
 
 // Datos de productos y categorías
 const productsData = {};
+const productsOrder = {};
 const categoriesMap = new Map();
 const categoriesSet = new Set();
 
-
 const formNewProd = document.getElementById('prod-form')
+const formNewOrder = document.getElementById('order-form')
 const addedProductsBody = document.getElementById('addedProductsBody');
 const prodList = document.getElementById('productsList');
 const prodCategorySelect = document.getElementById('prodCategory');
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const fragment = document.createDocumentFragment();
   productsList.forEach(product => {
-    productsData[product.name] = { productId: product.productId, description: product.description, salePrice: product.salePrice, categoryId: product.categoryId, stock: product.stock };
+    productsData[product.productId] = { prodName: product.name, description: product.description, salePrice: product.salePrice, categoryId: product.categoryId, stock: product.stock, selected: true };
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>${product.name}</td>
@@ -125,7 +126,7 @@ formNewProd.addEventListener('submit', async (e) => {
     categoriesMap.set(categoryId, category)
   }
 
-  productsData[name] = { productId, description, salePrice, categoryId, stock };
+  productsData[productId] = { name, description, salePrice, categoryId, stock };
   const tr = document.createElement('tr');
   tr.innerHTML = `<td>${name}</td><td>${category}</td><td>${salePrice.toFixed(2)}</td><td>${costPrice.toFixed(2)}</td><td>${stock}</td>`;
   addedProductsBody.appendChild(tr);
@@ -187,52 +188,68 @@ inpPrice.addEventListener('input', calcTotal);
 document.getElementById('orderProdCategory').addEventListener('change', () => {
   const cat = orderCategorySelect.value;
   prodList.innerHTML = '';
-  
   Object.entries(productsData)
     .filter(([_, p]) => p.categoryId == cat && p.stock > 0)
-    .forEach(([name, data]) => {
+    .forEach(([prodId, data]) => {
       const opt = document.createElement('option'); 
-      opt.value = data.productId;
-      opt.textContent = name;
+      opt.value = data.prodName;
+      opt.id = prodId;
       prodList.appendChild(opt);
     });
   
   prodName.value = '';
   inpPrice.value = '';
   inpTot.value = '';
-
-  prodList.addEventListener('change', () => {
-    orderProdNameInput.value = prodList.value; // Asignar el valor seleccionado al input
-    orderProdNameInput.textContent = prodList.textContent; // Asignar el valor seleccionado al input
-  });
-});
+})
 
 // Asignar precio al seleccionar producto en pedido
 prodName.addEventListener('change', e => {
-  const prod = productsData[e.target.value];
+  const name = e.target.value;
+  const prod = Object.values(productsData).find(p => p.prodName == name)
   if (prod) { inpPrice.value = prod.salePrice; calcTotal(); }
 });
 
 // Agregar línea al pedido
-document.getElementById('addOrderProdBtn').addEventListener('click', () => {
+document.getElementById('addProdBtn').addEventListener('click', () => {
   const name = document.getElementById('orderProdName').value.trim();
+  const prodId = Object.keys(productsData).find(id => productsData[id].prodName == name);
   const qty = parseFloat(inpQty.value);
   const price = parseFloat(inpPrice.value);
   const total = parseFloat(inpTot.value);
-  const payMode = document.getElementById('paymentMode').value.trim();
-  if (!name || isNaN(qty) || isNaN(price) || !payMode) return alert('Completa datos del producto y modo de pago');
+  if (!name || isNaN(qty) || qty < 1) return alert('Completa datos del producto');
   const tr = document.createElement('tr');
   tr.innerHTML = `<td>${name}</td><td>${qty}</td><td>${price.toFixed(2)}</td><td>${total.toFixed(2)}</td>`;
   orderProductsBody.appendChild(tr);
-  ['orderProdName','orderProdQuantity','orderProdUnitPrice','orderProdTotal']
-    .forEach(id => document.getElementById(id).value = '');
+  productsOrder[prodId] = qty
+  document.getElementById('orderProdName').innerHTML = '';
 });
 
+const socket = io()
 // Guardar pedido - limpieza de formulario por el momento
-document.getElementById('saveOrderBtn').addEventListener('click', () => {
-  if (!orderProductsBody.children.length) return alert('Agrega al menos un producto');
-  alert('Pedido registrado correctamente');
+formNewOrder.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  const rawData = new FormData(e.target);
+  const data = Object.fromEntries(
+    Array.from(rawData.entries()).map(([key, value]) => [
+      key, 
+      typeof value === 'string' ? value.trim() : value
+    ])
+  );
+  if (Object.keys(productsOrder).length == 0) return alert('Agrega al menos un producto');
+  if (!data.payMethod) return alert('Revisa el metodo de pago');
+  data['products'] = productsOrder
+  socket.emit("stall:order", data, (res) => {
+    if (!res.success) {
+      return Swal.fire({
+        icon: res.status,
+        title: res.message
+      })
+    }
+    return Swal.fire({
+      icon: res.status,
+      title: res.message
+    })
+  })
   orderProductsBody.innerHTML = '';
-  orderCategorySelect.selectedIndex = 0;
-  ['orderDate','clientName','paymentMode'].forEach(id => document.getElementById(id).value = id === 'clientName' ? 'Varios' : '');
+  // orderCategorySelect.selectedIndex = 0;
 });

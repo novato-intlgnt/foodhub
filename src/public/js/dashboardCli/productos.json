@@ -1,41 +1,34 @@
-{
-  "galleta": [
-    {
-      "nombre": "Oreo",
-      "descripcion": "Galleta de chocolate con crema",
-      "precio": 1.5,
-      "imagen": "/assets/images/imgDashCli/oreo.jpg",
-      "disponibilidad": 4
-    },
-    {
-      "nombre": "Soda",
-      "descripcion": "Galleta clásica de agua",
-      "precio": 1.0,
-      "imagen": "/assets/images/imgDashCli/soda.jpg",
-      "disponibilidad": 3
-    }
-  ],
-  "comida": [
-    {
-      "nombre": "Olluquito",
-      "descripcion": "Olluco cortado con trozos de carne",
-      "precio": 10.0,
-      "imagen": "/assets/images/imgDashCli/olluco.jpg",
-      "disponibilidad": 2
-    },
-    {
-      "nombre": "Caldo blanco",
-      "descripcion": "Con papas y cremas",
-      "precio": 11.0,
-      "imagen": "/assets/images/imgDashCli/caldo_blanco.jpg",
-      "disponibilidad": 2
-    },
-    {
-      "nombre": "Pollo broster",
-      "descripcion": "Con papas y cremas",
-      "precio": 11.0,
-      "imagen": "/assets/images/imgDashCli/broster.jpg",
-      "disponibilidad": 2
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "nombre": "Hamburguesa",
+    "precio": 12.5,
+    "cat": "alimento",
+    "description": "Deliciosa hamburguesa con carne jugosa, queso derretido y vegetales frescos.",
+    "stock": 30
+  },
+  {
+    "id": 2,
+    "nombre": "Pizza",
+    "precio": 20,
+    "cat": "alimento",
+    "description": "Pizza artesanal con salsa casera, queso mozzarella y tus ingredientes favoritos.",
+    "stock": 18
+  },
+  {
+    "id": 3,
+    "nombre": "Ensalada",
+    "precio": 10,
+    "cat": "ligero",
+    "description": "Ensalada fresca con lechuga, tomate, zanahoria rallada y un aderezo ligero.",
+    "stock": 25
+  },
+  {
+    "id": 4,
+    "nombre": "Frozen",
+    "precio": 3,
+    "cat": "bebida",
+    "description": "Refrescante bebida congelada de frutas, perfecta para el calor.",
+    "stock": 50
+  }
+]
