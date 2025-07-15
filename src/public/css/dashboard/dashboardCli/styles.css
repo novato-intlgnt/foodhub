@@ -9,6 +9,7 @@
 }
 *{
     box-sizing: border-box;
+    background:var(--border_general);
 }
 body {
       box-sizing: border-box;
@@ -149,9 +150,9 @@ header{
   color: white ;
   
 }
-.info_text_description{
+/* .info_text_description{
   
-}
+} */
 .info_text_description p{
   font-size: 0.85rem;
   margin: 0px;
@@ -209,6 +210,11 @@ header{
   border: none;
   border-radius : 99px;
 }
+.producto_entrega button:hover {
+  background: rgb(198, 68, 64);
+
+}
+
 .producto_entrega img {
   width: 1.1rem;
 }
@@ -394,6 +400,57 @@ header{
 }
 
 
+
+#resultados {
+  display: none;
+}
+
+#resultados.visible {
+  display: block;
+}
+.modal {
+  display: none; /* 👈 este SÍ debe estar al inicio */
+  position: absolute;
+  inset: 0;
+  z-index: 999999;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  font-family: var(--font_family_general);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  max-width: 90vw;
+  width: 400px;
+  text-align: center;
+  margin: auto;
+  margin-top: 25vh;
+  align-self: center;
+
+}
+
+.opciones-pago {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#btn-confirmar {
+  background: var(--color_principal);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+
+
 @media (min-width: 768px) {
   .search{
     margin: var(--margin-alt) var(--marign-lados);
@@ -413,11 +470,19 @@ header{
   }
 }
 
+#categoriaSelect{
+appearance: none;
+border: none;
+display: block;
+background: var(--color_principal);
+color: white;
+font-size: 12px;
+font-family: var(--font_family_general);
+height: 40px;
+border-radius:var(--border_general) ;
+text-align: center;
 
-#resultados {
-  display: none;
 }
-
-#resultados.visible {
-  display: block;
-}
+option{
+border-radius: var(--border_general);
+background: rgb(106, 106, 106);}

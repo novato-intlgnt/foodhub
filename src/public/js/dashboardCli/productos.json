@@ -1,34 +1,103 @@
 [
   {
-    "id": 1,
-    "nombre": "Hamburguesa",
-    "precio": 12.5,
-    "cat": "alimento",
-    "description": "Deliciosa hamburguesa con carne jugosa, queso derretido y vegetales frescos.",
-    "stock": 30
+    "product_id": 1,
+    "name": "Coca-Cola",
+    "description": "Bebida gaseosa 500ml",
+    "stock": 25,
+    "price": 3.5,
+    "category_id": 1
+  },
+
+  {
+    "product_id": 2,
+    "name": "Inka Kola",
+    "description": "Bebida nacional 500ml",
+    "stock": 20,
+    "price": 3.0,
+    "category_id": 1
+  },
+
+  {
+    "product_id": 6,
+    "name": "Agua Cielo",
+    "description": "Agua sin gas 625ml",
+    "stock": 30,
+    "price": 2.0,
+    "category_id": 1
+  },
+
+  {
+    "product_id": 7,
+    "name": "Pepsi",
+    "description": "Bebida gaseosa 500ml",
+    "stock": 18,
+    "price": 3.2,
+    "category_id": 1
+  },
+
+  {
+    "product_id": 3,
+    "name": "Galletas Oreo",
+    "description": "Galletas rellenas de chocolate",
+    "stock": 40,
+    "price": 2.5,
+    "category_id": 2
+  },
+  
+  {
+    "product_id": 4,
+    "name": "Chizitos",
+    "description": "Snack de queso inflado",
+    "stock": 50,
+    "price": 1.5,
+    "category_id": 2
   },
   {
-    "id": 2,
-    "nombre": "Pizza",
-    "precio": 20,
-    "cat": "alimento",
-    "description": "Pizza artesanal con salsa casera, queso mozzarella y tus ingredientes favoritos.",
-    "stock": 18
+    "product_id": 8,
+    "name": "Piqueo Snax",
+    "description": "Mix salado de papas y maíz",
+    "stock": 35,
+    "price": 2.8,
+    "category_id": 2
   },
   {
-    "id": 3,
-    "nombre": "Ensalada",
-    "precio": 10,
-    "cat": "ligero",
-    "description": "Ensalada fresca con lechuga, tomate, zanahoria rallada y un aderezo ligero.",
-    "stock": 25
+    "product_id": 9,
+    "name": "Galletas Tentación",
+    "description": "Galletas rellenas de fresa",
+    "stock": 25,
+    "price": 2.2,
+    "category_id": 2
   },
   {
-    "id": 4,
-    "nombre": "Frozen",
-    "precio": 3,
-    "cat": "bebida",
-    "description": "Refrescante bebida congelada de frutas, perfecta para el calor.",
-    "stock": 50
+    "product_id": 5,
+    "name": "Hamburguesa",
+    "description": "Con papas y gaseosa",
+    "stock": 15,
+    "price": 12.0,
+    "category_id": 3
+  },
+  {
+    "product_id": 10,
+    "name": "Salchipapas",
+    "description": "Papas fritas con salchicha",
+    "stock": 10,
+    "price": 9.0,
+    "category_id": 3
+  },
+  {
+    "product_id": 11,
+    "name": "Pollo Broaster",
+    "description": "2 presas con papas",
+    "stock": 12,
+    "price": 13.5,
+    "category_id": 3
+  },
+  {
+    "product_id": 12,
+    "name": "Hot Dog",
+    "description": "Con papas y mayonesa",
+    "stock": 20,
+    "price": 7.5,
+    "category_id": 3
   }
 ]

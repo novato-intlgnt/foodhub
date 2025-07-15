@@ -5,13 +5,12 @@
     <title>Mi Sitio Web</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="css/dashboard/dashboardCli/styles.css" />
+    <link rel="stylesheet" href="/src/public/css/dashboard/dashboardCli/styles.css" />
     <!-- <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'> -->
     
-    <script type="module" src="./js/dashboardCli/dashCli-script.js" defer></script>
-    <script type="module" src="./js/dashboardCli/components/deplegable_navbar.js" defer></script>
-    <script type="module" src="./js/dashboardCli/components/funciones.js" defer></script>
-    <script type="module" src="./js/dashboardCli/components/notificaciones.js" defer></script>
+    <script type="module" src="/src/public/js/dashboardCli/dashCli-script.js" defer></script>
+    <script type="module" src="/src/public/js/dashboardCli/components/deplegable_navbar.js" defer></script>
+    <script type="module" src="/src/public/js/dashboardCli/components/funciones.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     
     <!-- <link
@@ -23,7 +22,7 @@
     <div class="contenedor_nab">
       
       <button id="menu-toggle" aria-label="Abrir menú">
-        <img src="assets/images/imgDashCli/menu.svg" alt="Menú" width="30" height="30">
+        <img src="/src/public/assets/images/imgDashCli/menu.svg" alt="Menú" width="30" height="30">
       </button>
       
       
@@ -48,12 +47,18 @@
     <div class="general">
       <div class="cuadro_estado">
         <div class="search" id="search_prod">
+          <button class="btn-togle_factura" id="toggleBtn_factura" onclick="despligue_factura()">
+            <img src="/src/public/assets/images/imgDashCli/clipboard-check .svg" alt=""></button>
           <input id="busqueda" type="text" 
           placeholder="Porducto a buscar..." 
           onfocus="this.placeholder=''" 
           onblur="if(this.value === '') this.placeholder='Producto a buscar...'" />
-          <button class="btn-togle_factura" id="toggleBtn_factura" onclick="despligue_factura()">
-            <img src="assets/images/imgDashCli/clipboard-check .svg" alt=""></button>
+          
+          
+          <select id="categoriaSelect">
+            <option value="">Categoría</option>
+          </select>
+
       </div>
       <div class="resultados" id="resultados"></div>
       <div class="last_order" id="last_order"><h1>Ultimo pedido: </h1></div>
