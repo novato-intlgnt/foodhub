@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Función para actualizar selects de categorías
 function updateCategoryUI() {
-  prodCategorySelect.innerHTML = '<option value="">--Selecciona--</option>';
+  prodCategorySelect.innerHTML = '<option value="">Selecciona</option>';
   Array.from(categoriesSet).sort().forEach(cat => {
     const opt = document.createElement('option');
     opt.value = cat;
@@ -41,13 +41,7 @@ function updateCategoryUI() {
     prodCategorySelect.appendChild(opt);
   });
 
-  const addOpt = document.createElement('option');
-  addOpt.value = '__new__';
-  addOpt.textContent = '+ Añadir categoría';
-  prodCategorySelect.appendChild(addOpt);
-
- 
-  orderCategorySelect.innerHTML = '<option value="">--Selecciona--</option>';
+  orderCategorySelect.innerHTML = '<option value="">Selecciona</option>';
   Array.from(categoriesSet).sort().forEach(cat => {
     const opt = document.createElement('option');
     opt.value = cat;
