@@ -13,12 +13,6 @@
     <script type="module" src="/src/public/js/dashboardCli/components/funciones.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     
-    <!-- <link
-    href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
-    rel="stylesheet"
-    />
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-straight/css/uicons-bold-straight.css'> -->
-    
     <div class="contenedor_nab">
       
       <button id="menu-toggle" aria-label="Abrir menú">
@@ -105,9 +99,17 @@
       <div class="opciones-pago">
         <label><input type="radio" name="metodo" value="Yape" checked> Yape</label>
         <label><input type="radio" name="metodo" value="Plin"> Plin</label>
-      </div>
-      <button id="btn-confirmar">Confirmar pago</button>
-    </div>
+      </div> <button id="btn-confirmar">Confirmar pago</button></div>
   </div>
-  </body>
+  <div class="std_rojo">
+    <button  id="toggleBtn_std" onclick="despligue_1()">Ver estado</button>
+    <div class="circulo" id="circulo"><p>0</p></div>
+  </div>
+
+
+  <div class="contenido_estado" id="contenido_std" style="display: none;"></div>
+  
+
+  
+</body>
 </html>
