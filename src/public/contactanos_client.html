@@ -1,20 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Mi Sitio Web</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="/src/public/css/dashboard/dashboardCli/styles.css" />
-    <link rel="stylesheet" href="/src/public/css/dashboard/dashboardCli/footer.css" />
-    <!-- <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'> -->
-    
-    <script type="module" src="/src/public/js/dashboardCli/dashCli-script.js" defer></script>
-    <script type="module" src="/src/public/js/dashboardCli/components/deplegable_navbar.js" defer></script>
-    <script type="module" src="/src/public/js/dashboardCli/components/funciones.js" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    
-    <div class="contenedor_nab">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Información del Proyecto - App de Comida</title>
+  <link rel="stylesheet" href="/src/public/css/dashboard/dashboardCli/contactanos.css" />
+  <link rel="stylesheet" href="/src/public/css/dashboard/dashboardCli/styles.css" />
+  <link rel="stylesheet" href="/src/public/css/dashboard/dashboardCli/footer.css" />
+  <script type="module" src="/src/public/js/dashboardCli/components/deplegable_navbar.js" defer></script>
+
+
+   <div class="contenedor_nab">
       
       <button id="menu-toggle" aria-label="Abrir menú">
         <img src="/src/public/assets/images/imgDashCli/menu.svg" alt="Menú" width="30" height="30">
@@ -30,87 +26,76 @@
         </ul>
       </nav>
     </div>
-    
-    
-  </head>
-  <body>
-    <div class="fondo-contenedor">
-          <div class="fondo-img"></div>
-    <div class="fondo-degradado"></div>
-    </div>
+</head>
+<body>
+     
 
-    <div class="general">
-      <div class="cuadro_estado">
-        <div class="search" id="search_prod">
-          <button class="btn-togle_factura" id="toggleBtn_factura" onclick="despligue_factura()">
-            <img src="/src/public/assets/images/imgDashCli/clipboard-check .svg" alt=""></button>
-          <input id="busqueda" type="text" 
-          placeholder="Porducto a buscar..." 
-          onfocus="this.placeholder=''" 
-          onblur="if(this.value === '') this.placeholder='Producto a buscar...'" />
-          
-          
-          <select id="categoriaSelect">
-            <option value="">Categoría</option>
-          </select>
 
-      </div>
-      <div class="resultados" id="resultados"></div>
-      <div class="last_order" id="last_order"><h1>Ultimo pedido: </h1></div>
-      <div class="list_order">
-        <button class="btn-togle" id="toggleBtn" onclick="despligue()">desplegar</button>
-        <div class="contendor_last">
-          
-          <table id="contenido" style="display: none;">
-            <thead>
-              <tr>
-                
-              </tr>
-            </thead>
-            <tbody id="list_order_table"></tbody>
-          </table>
+ 
+  <main>
+    <section id="objetivos">
+      <h2>Objetivos del Proyecto</h2>
+      <p>
+        Desarrollar una aplicación moderna, eficiente y centrada en el usuario que permita
+        gestionar pedidos de comida de manera ágil, reduciendo tiempos de espera,
+        optimizando el proceso de atención y fortaleciendo la relación cliente-vendedor.
+      </p>
+    </section>
+
+    <section id="problematica">
+      <h2>Problemática Identificada</h2>
+      <p>
+        Los actuales sistemas de pedidos presentan desorganización, demoras, y falta de seguimiento.
+        Esto genera insatisfacción en los usuarios, especialmente en horarios de alta demanda.
+        Nuestra aplicación busca transformar esta experiencia mediante soluciones digitales inteligentes.
+      </p>
+    </section>
+
+    <section id="caracteristicas">
+      <h2>Componentes de la Aplicación</h2>
+      <ul>
+        <li>Panel principal con acceso rápido a platos destacados</li>
+        <li>Filtrado avanzado por tipo de comida, precio y disponibilidad</li>
+        <li>Historial de pedidos y sugerencias personalizadas</li>
+        <li>Integración con métodos de pago digitales</li>
+        <li>Soporte en tiempo real y confirmación de pedidos vía notificación</li>
+      </ul>
+    </section>
+
+    <section id="equipo">
+      <h2>Equipo de Desarrollo</h2>
+      <div class="integrantes">
+        <div class="integrante">
+          <h3>Alejandro Conadori Pallardel</h3>
+          <p>Desarrollador Backend y coordinador del sistema (Ingeniería de Sistemas)</p>
+        </div>
+        <div class="integrante">
+          <h3>Angelo Josue Quispe Suarez</h3>
+          <p>Diseñador de interfaces y lógica visual de usuario (Ingeniería de Sistemas)</p>
+        </div>
+        <div class="integrante">
+          <h3>Lizzy Arlte Huayhuay Prez</h3>
+          <p>Supervisora de calidad y documentación técnica (Ingeniería de Sistemas)</p>
         </div>
       </div>
-    </div>
-      <div class="factura" id="factura" style="display: none;">
-        <button class="btn-togle_factura_negative" id="toggleBtn_factura_negative" onclick="despligue_factura_negative()">
-          Regresar</button>
 
-      <!-- <p id="pedido_title">Pedidos: </p> -->
-      <div class="tablas_" >
-        <table>
-          <thead>
-            <tr>
-              <td><p>Producto</p></td>
-              <td><p>Cantidad</p></td>
-              <td><p>Precio(s/.)</p></td>
-            </tr>
-          </thead>
-          <tbody id="tabla_pedidos"></tbody>
-        </table>
+    </section>
+
+    <section id="ubicacion">
+      <h2>Ubicación del Desarrollo</h2>
+      <p>El proyecto se desarrolla en la Universidad Nacional de San Agustín, Arequipa - Perú.</p>
+      <div class="mapa">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3826.4111080821864!2d-71.53745108521582!3d-16.39880358867052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424a3b7232bb09%3A0xe98d2b5e3f1db2d7!2sUNSA!5e0!3m2!1ses!2spe!4v1625632141612!5m2!1ses!2spe"
+          loading="lazy"
+          allowfullscreen=""
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
-      <button id="btn-pagar">Pagar</button>
+    </section>
+  </main>
 
-    </div>
-  </div>
-
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <h2>Finalizar pago</h2>
-      <div class="opciones-pago">
-        <label><input type="radio" name="metodo" value="Yape" checked> Yape</label>
-        <label><input type="radio" name="metodo" value="Plin"> Plin</label>
-      </div> <button id="btn-confirmar">Confirmar pago</button></div>
-  </div>
-  <div class="std_rojo">
-    <button  id="toggleBtn_std" onclick="despligue_1()">Ver estado</button>
-    <div class="circulo" id="circulo"><p>0</p></div>
-  </div>
-
-
-  <div class="contenido_estado" id="contenido_std" style="display: none;"></div>
-  
-  <footer>
+  <footer style="padding: 0px;">
     
   <div class="footer-top">
         <div class="contenedor-top">
@@ -192,5 +177,6 @@
 
 
   </footer>
+
 </body>
 </html>

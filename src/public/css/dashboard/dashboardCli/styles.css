@@ -108,7 +108,7 @@ header{
 .resultados{
   width: 100%;
   
-  /* position: absolute; */
+  position: absolute;
   /* background: linear-gradient(145deg, rgba(255, 237, 236, 0.8));  */
   backdrop-filter: blur(3px);
   font-family: var(--font_family_general);
@@ -229,7 +229,7 @@ header{
   border: 2px solid var(--color_principal);
   border-radius: var(--border_general);
   margin: var(--margin-alt) 2vw;
-  margin-top: 0px;
+  margin-top: 100px;
   margin-bottom: 2rem;
   font-family: var(--font_family_general);
   color: var(--color_principal);
@@ -505,7 +505,7 @@ option{
     height: 3rem;
     padding: 0px 10px;
     border-radius: 10px;
-    
+
   }
   .circulo{
     display: flex;
@@ -536,6 +536,9 @@ option{
 
 
   @media (min-width: 768px) {
+    .std_rojo{
+      margin: 0px 276px;
+    }
     .search{
       margin: var(--margin-alt) var(--marign-lados);
     }

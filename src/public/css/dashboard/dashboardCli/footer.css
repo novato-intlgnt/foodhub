@@ -1,0 +1,158 @@
+:root {
+  --padding-gen: 20px;
+  --size-footer: 14px;
+  --color-principal: rgb(244, 82, 76);
+}
+
+footer {
+  color: white;
+  font-family: sans-serif;
+}
+
+.footer-top {
+  background: var(--color-principal);
+  justify-content: space-between;
+  padding: 25px 0px;
+  margin-top: 100px;
+}
+
+.contenedor-top {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 276px;
+}
+
+.contenedor-top .left {
+  display: flex;
+  gap: 40px;
+}
+
+.contenedor-top .right {
+  display: flex;
+  justify-content: space-between;
+  gap: 17px;
+}
+
+.contenedor-top .footer-section {
+  flex: 1 1 22%;
+  width: 190px;
+  margin: none;
+}
+
+.footer-section img {
+  height: 24px;
+}
+
+.footer-section h3 {
+  color: white;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  margin: 0.5rem 0;
+}
+
+.footer-section p {
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  font-size: 14px;
+  margin: 0.5rem 0;
+}
+
+.footer-section a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+
+/* SECCION DE MEDIA */
+.footer-middle {
+  background: #d84949;
+  padding: 20px 0px;
+}
+
+.contenedor-middle {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 276px;
+  font-size: var(--size-footer);
+}
+
+.contenedor-middle .left {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.contenedor-middle a {
+  color: white;
+  text-decoration: none;
+  font-size: var(--size-footer);
+}
+
+
+/* SECCION INFERIOR */
+.footer-bottom {
+  background: #7e2b2b;
+  padding: 20px 0px;
+}
+
+.contenedor-bottom {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 276px;
+}
+
+.contenedor-bottom .left {
+  display: flex;
+  gap: 40px;
+}
+
+.contenedor-bottom .right {
+  padding-left: 150px;
+}
+
+.right img,
+.left img {
+  max-height: 30px;
+}
+
+/* ✅ MEDIA QUERY PARA MÓVILES */
+@media screen and (max-width: 768px) {
+  .contenedor-top,
+  .contenedor-middle,
+  .contenedor-bottom {
+    flex-direction: column;
+    margin: 0 20px;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .contenedor-top .left,
+  .contenedor-bottom .left,
+  .contenedor-middle .left {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .contenedor-top .right,
+  .contenedor-bottom .right,
+  .contenedor-middle .right {
+    padding-left: 0;
+    align-self: center;
+    gap: 10px;
+  }
+
+  .contenedor-top .footer-section {
+    width: 100%;
+  }
+
+  .right img,
+  .left img {
+    max-width: 100px;
+  }
+
+  .footer-middle,
+  .footer-top,
+  .footer-bottom {
+    padding: 15px 0;
+  }
+}
