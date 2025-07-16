@@ -68,7 +68,8 @@ export class StallModel {
         [user, role]
       );
 
-      const values = [rows[0].user_id];
+      const stallId = rows[0].user_id
+      const values = [stallId];
 
       let query = `
         SELECT
@@ -87,7 +88,7 @@ export class StallModel {
           name: row.category_name
         }));
 
-      return categoriesObj
+      return { categoriesObj, stallId }
     } catch (error) {
       console.error('Error in searching categorie:', error);
       throw error;

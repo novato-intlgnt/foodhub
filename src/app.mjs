@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url'
 import { userRouter } from './dev/routes/user.mjs'
 import { stallRouter } from './dev/routes/stall.mjs'
 import { clientRouter } from './dev/routes/client.mjs'
+import { orderRouter } from './dev/routes/orders.mjs'
 
 import { initSocket } from './dev/sockets/io.mjs' 
 
@@ -48,7 +49,7 @@ export const createApp = ({ emailService, userModel, stallModel, clientModel, or
     res.sendFile(path.join(__dirname, 'public', 'login.html'))
   })
   app.get('/login/stail', (_, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'loginStail.html'))
+    res.sendFile(path.join(__dirname, 'public', 'loginStall.html'))
   })
   app.get('/dash', (_, res) => {
     res.sendFile(path.join(__dirname, 'public', '/dash/dashboardtienda.html'))
@@ -58,6 +59,7 @@ export const createApp = ({ emailService, userModel, stallModel, clientModel, or
   app.use('/user', userRouter({ userModel, emailService }))
   app.use('/stall', stallRouter({ stallModel }))
   app.use('/client', clientRouter({ clientModel }))
+  app.use('/order', orderRouter({ orderModel }))
 
   // Metrics endpoint (for Prometheus)
   app.get('/metrics', async (req, res) => {

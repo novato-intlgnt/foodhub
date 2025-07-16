@@ -77,7 +77,14 @@ static async getAllProducts({ input }) {
         ["Alejandro", 'stall']
       );
 
-      const values = [rows[0].user_id];
+      const { rows: rowsClient } = await client.query(
+        'SELECT user_id FROM users WHERE name = $1 and role = $2',
+        [user, role]
+      );
+
+      const clientId = rowsClient[0].user_id;
+      const stallId = rows[0].user_id;
+      const values = [stallId];
 
       let query = `
         SELECT DISTINCT
@@ -97,7 +104,7 @@ static async getAllProducts({ input }) {
         }));
 
       console.log(result)
-      return categoriesObj
+      return { categoriesObj, stallId, clientId }
     } catch (error) {
       console.error('Error in searching categorie:', error);
       throw error;

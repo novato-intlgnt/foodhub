@@ -9,17 +9,19 @@
 
 const socket = io()
 
-export function renderizarUltimoPedido(lista, container) {
-  const ultimo = lista[lista.length - 1];
-  const tabla = document.createElement("div");
+const last_order = document.getElementById("last_order");
+const list_order = document.getElementById("list_order_table");
 
-  const nombre = ultimo.items.map(i => i.name).join(", ");
+export function renderizarUltimoPedido(lista, container) {
+  const tabla = document.createElement("div");
+  const time = new Date().toLocaleString()
+  const nombre = Object.keys(lista.products).map(i => i).join(", ");
 
   tabla.innerHTML = `
     <div class="last_name"><p>${nombre}</p></div>
     <div class="duo_last">
-      <div class="last_date"><p>${ultimo.date}</p></div>
-      <div class="last_precio"><p>s/. ${ultimo.totalAmount.toFixed(2)}</p></div>
+      <div class="last_date"><p>${time}</p></div>
+      <div class="last_precio"><p>s/. ${lista.totalAmount}</p></div>
     </div>
   `;
 
@@ -31,17 +33,16 @@ export function renderizarListaPedidos(lista, container) {
   container.innerHTML = "";
 
   lista.forEach(element => {
-    const nombres = element.items.map(i => i.name).join(", ");
-    const cant = element.items.map(i => i.quantity).join(", ");
+    const items = Object.entries(element.productsObj).map(([name, qty]) => {`<p>${name} (x${qty})</p>`})
 
     const tr = document.createElement("div");
     tr.className = "tabla";
     tr.innerHTML = `
       <div>   
-        <p>${nombres} (x${cant})</p>
-        <p>${element.date}</p>
+        ${items}
+        <p>${Date.now()}</p>
       </div>
-      <div><p>s/. ${element.totalAmount.toFixed(2)}</p></div>
+      <div><p>s/. ${element.totalAmount}</p></div>
     `;
 
  hr = document.createElement("hr");
@@ -121,24 +122,6 @@ export function agregar(elemento, id, name_1, price, inputElement) {
 
   const subtotal = price * cantidad;
 
-  const venta = {
-    sale_id: Date.now(), // Genera un ID único por tiempo
-    client_id: 1,
-    stall_id: 1,
-    date: new Date().toISOString().split("T")[0],
-    totalAmount: subtotal,
-    items: [
-      {
-        name: name_1,
-        product_id: id,
-        quantity: cantidad,
-        unit_price: price
-      }
-    ]
-  };
-
-  pedidos_realizados.push(venta);
-
   // Mostrar en tabla visual
   const tbody = document.getElementById("tabla_pedidos");
   const element_factura = document.createElement("tr");
@@ -151,25 +134,21 @@ export function agregar(elemento, id, name_1, price, inputElement) {
 
   // También registramos pedido simple para el backend
   pedidos[id] = cantidad;
-  console.log("Estado actual de pedidos:", pedidos);
-  console.log("Estado actual de pedidos:", pedidos_realizados);
 }
 
-export function enviarPedido(payMethod) {
+export function enviarPedido(payMethod, stallId) {
   order = { 'payMethod': payMethod }
   order['products'] = pedidos
   console.log(order)
-  socket.emit("client:order", order, (res) => {
+  socket.emit("client:order", { stallId, order }, (res) => {
     if (!res.success) {
       return Swal.fire({
         icon: res.status,
         title: res.message
       })
     }
-    return Swal.fire({
-      icon: res.status,
-      title: res.message
-    })
+    renderizarUltimoPedido(res.data, last_order)
+    // renderizarListaPedidos(pedidosData, list_order);
   })
 }
 

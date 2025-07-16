@@ -156,3 +156,53 @@ thead th {
   background: #e74c3c;
   color: #fff;
 }
+
+.card-container {
+  flex: 1;
+  background: #fceeee;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #100f0f;
+  border-radius: 8px;
+  padding: 10px 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.card p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.card .user {
+  font-weight: bold;
+}
+
+.card .total {
+  font-weight: bold;
+  float: right;
+}
+
+.btn-estado {
+  display: block;
+  margin: 10px auto 0;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}

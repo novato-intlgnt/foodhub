@@ -22,8 +22,9 @@ export class OrderController {
         const newOrder = await this.orderModel.setOrder({ input: result.data })
 
         if(!newOrder.success) return { success: false, status: 'warning', message: 'Hubo un problema procesando el pedido'}
+
         const { position, totalOrder } = newOrder
-        return { succes: true, status: 'success', message: `Se proceso el pedido, hay ${newOrder.totalOrder} pedidos, y usted esta en la posicion ${newOrder.position}`, position, totalOrder };
+        return { success: true, "data": newOrder.data };
        
       } catch (err) {
         console.log('Error:', err)
@@ -33,5 +34,31 @@ export class OrderController {
           message: 'Error internal server',
         }
       }
+  }
+  getAllOrders = async (req, res) => {
+      try {
+      console.log(req.body)
+      const orderlist = await this.orderModel.getAllOrders({ input: req.body })
+      
+      if (!orderlist == true) return res.status(400).json({ status: 'warning', message: `we couldn't loaded the products` })
+        
+      return res.status(200).json({ success: true, data: orderlist })
+    } catch (err) {
+      console.log('error:', err)
+      return res.status(500).send({ status: 'error', message: 'error internal server' })
+    }
+  }
+  updateStatus = async (req, res) => {
+    try {
+      console.log(req.body)
+      const orderlist = await this.orderModel.updateStatus({ input: req.body })
+      
+      if (!orderlist == true) return res.status(400).json({ status: 'warning', message: `we couldn't loaded the products` })
+        
+      return res.status(200).json({ success: true, data: orderlist })
+    } catch (err) {
+      console.log('error:', err)
+      return res.status(500).send({ status: 'error', message: 'error internal server' })
+    }
   }
 }

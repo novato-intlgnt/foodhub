@@ -10,9 +10,9 @@ import {
 
 
 const url = window.location.origin
+let stallId;
+let clientId;
 
-const productsData = {};
-const productsOrder = {};
 const categoriesMap = new Map();
 const categoriaSelect = document.getElementById("categoriaSelect");
 const search = document.getElementById("busqueda");
@@ -33,10 +33,25 @@ function debounce(callback, delay) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
- const { data: categoryData } = await fetch(`${url}/client/categories`, {
+ const { data: info } = await fetch(`${url}/client/categories`, {
     method: 'GET',
   }).then(res => res.json())
-
+  const categoryData = info.categoriesObj
+  stallId = info.stallId
+  clientId = info.clientId
+  
+  const socket = io()
+  socket.emit('client:join', clientId)
+  socket.on('client:new-order', (info) => {
+    console.log(info.message);
+  });
+  socket.on("order:statusChanged", ({ orderId, newStatus }) => {
+    Swal.fire({
+      icon: 'info',
+      title: `Tu pedido #${orderId} ha cambiado de estado`,
+      text: `Nuevo estado: ${newStatus}`
+    });
+  });
   categoriesMap.clear();
   categoryData.forEach(cat => {
     categoriesMap.set(cat.categoryId, cat.name);
@@ -57,7 +72,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const payMethod = document.querySelector('input[name="metodo"]:checked').value;
 
     modal.style.display = "none";
-    factura.style.display = "none";
     
     // Limpiar tabla visual
     const tbody = document.getElementById("tabla_pedidos");
@@ -70,41 +84,36 @@ document.addEventListener('DOMContentLoaded', async () => {
     // renderizarListaPedidos(pedidosCompletos, list_order);
     
     // Enviar y limpiar datos
-    enviarPedido(payMethod);
+    enviarPedido(payMethod, stallId);
     pedidos_realizados.length = 0;
     pedidos.length = 0;
     
     alert("¡Pedido confirmado!");
   });
-});
 
 
-//  Búsqueda por texto + categoría
-search.addEventListener("input", debounce(async () => {
-  const text = search.value.trim();
-  const id = parseInt(categoriaSelect.value);
+  //  Búsqueda por texto + categoría
+  search.addEventListener("input", debounce(async () => {
+    const text = search.value.trim();
+    const id = parseInt(categoriaSelect.value);
 
-  const { data: productsList } = await fetch(`${url}/client/products`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      categoryId: id,
-      str: text
-    })
-  }).then(res => res.json())
-  console.log(productsList)
-  mostrarResultados(text, productsList, results, agregar);
-}, 300));
+    const { data: productsList } = await fetch(`${url}/client/products`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        categoryId: id,
+        str: text
+      })
+    }).then(res => res.json())
+    console.log(productsList)
+    mostrarResultados(text, productsList, results, agregar);
+  }, 300));
 
-  
+    
 
-renderizarUltimoPedido(pedidosData, last_order);
-renderizarListaPedidos(pedidosData, list_order);
+  renderizarUltimoPedido(pedidosData, last_order);
+  renderizarListaPedidos(pedidosData, list_order);
 
-
-socket.emit('join:clients')
-socket.on('client:new-order', (info) => {
-  console.log(info.message);
 });
