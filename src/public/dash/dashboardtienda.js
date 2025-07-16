@@ -57,18 +57,33 @@ function updateCategoryUI() {
 }
 
 // Agregar nueva cateegoria en anadir producto
-prodCategorySelect.addEventListener('change', () => {
-  if (prodCategorySelect.value === '__new__') {
-    const name = prompt('Introduce el nombre de la nueva categoría:').trim();
-    if (name && !categoriesSet.has(name)) {
-      categoriesSet.add(name);
-      updateCategoryUI();
-      prodCategorySelect.value = name;
-    } else {
-      prodCategorySelect.value = '';
-    }
-  }
+// Botón para añadir una nueva categoría usando prompt
+document.getElementById('addCategoryBtn').addEventListener('click', () => {
+  const nueva = prompt('Introduce el nombre de la nueva categoría:');
+  if (!nueva) return;
+
+  const nombre = nueva.trim();
+  if (!nombre) return alert('El nombre no puede estar vacío');
+  if (categoriesSet.has(nombre)) return alert('La categoría ya existe');
+
+  categoriesSet.add(nombre);
+
+  // Agregar a <select> de añadir producto
+  const opt1 = document.createElement('option');
+  opt1.value = nombre;
+  opt1.textContent = nombre;
+  document.getElementById('prodCategory').appendChild(opt1);
+
+  // Agregar a <select> de registrar pedido
+  const opt2 = document.createElement('option');
+  opt2.value = nombre;
+  opt2.textContent = nombre;
+  document.getElementById('orderProdCategory').appendChild(opt2);
+
+  // Seleccionarla automáticamente
+  document.getElementById('prodCategory').value = nombre;
 });
+
 
 // Cálculo del total a pagar
 function calcTotal() {
