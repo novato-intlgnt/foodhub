@@ -25,6 +25,11 @@ const inpTot = document.getElementById('orderProdTotal');
 const orderProductsBody = document.getElementById('orderProductsBody');
 
 document.addEventListener('DOMContentLoaded', () => {
+  const hoy = new Date();
+  const yyyy = hoy.getFullYear();
+  const mm = String(hoy.getMonth() + 1).padStart(2, '0');
+  const dd = String(hoy.getDate()).padStart(2, '0');
+  document.getElementById('orderDate').value = `${yyyy}-${mm}-${dd}`;
   Array.from(prodCategorySelect.options)
     .map(opt => opt.value).filter(Boolean)
     .forEach(cat => categoriesSet.add(cat));
