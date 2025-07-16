@@ -84,13 +84,13 @@
           <h2>Añadir Producto</h2>
           <div class="row">
             <input type="text" id="prodName" placeholder="Producto">
-            <select id="prodCategory">
-              <option value="" disabled selected>Seleccione categoría</option>
-              <option value="Bebidas">Bebidas</option>
-              <option value="Sandwiches">Sandwiches</option>
-              <option value="Almuerzos">Almuerzos</option>
-              <option value="Galletas y otros">Galletas y otros</option>
-            </select>
+            <div id="prodCategoryContainer">
+              <select id="prodCategory">
+              <option value="">Selecciona</option>
+              </select>
+              <button type="button" id="addCategoryBtn">Agregar categoría</button>
+           </div>
+
             <input type="number" id="prodPrice" placeholder="Precio">
             <input type="number" id="prodStock" placeholder="Stock">
           </div>
