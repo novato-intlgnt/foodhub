@@ -161,6 +161,39 @@ thead th {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+/* Estilo contenedor de categoría y botón */
+#prodCategoryContainer {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* Estilo para el select de categoría */
+#prodCategory {
+  flex: 1;
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Estilo para el botón de agregar categoría */
+#addCategoryBtn {
+  flex: 1;
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  background-color: #ccc;
+  color: black;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#addCategoryBtn:hover {
+  background-color: #e74c3c;
+}
+
 
 
 
