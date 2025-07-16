@@ -1,0 +1,6 @@
+[
+  { "category_id": 1, "name": "Bebidas" },
+  { "category_id": 2, "name": "Snacks" },
+  { "category_id": 3, "name": "Comida Rápida" },
+  { "category_id": 4, "name": "Postres" }
+]

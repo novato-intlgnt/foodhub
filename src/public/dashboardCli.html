@@ -3,57 +3,116 @@
   <head>
     <meta charset="UTF-8" />
     <title>Mi Sitio Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="/css/dashboard/dashboardCli/styles.css" />
+
     <script src="/socket.io/socket.io.js" defer></script>
     <script
       type="module"
       src="/js/dashboardCli/dashCli-script.js"
       defer
     ></script>
+    <script
+      type="module"
+      src="/js/dashboardCli/components/desplegable_navbar.js"
+      defer
+    ></script>
+    <script
+      type="module"
+      src="/js/dashboardCli/components/funciones.js"
+      defer
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <button>☰</button>
-    <nav>
-      <ul>
-        <li><a>Inicio</a></li>
-        <li><a>Contactanos</a></li>
-        <li><a>Salida</a></li>
-      </ul>
-    </nav>
+    <div class="contenedor_nab">
+      <button id="menu-toggle" aria-label="Abrir menú">
+        <img
+          src="/assets/images/imgDashCli/menu.svg"
+          alt="Menú"
+          width="30"
+          height="30"
+        />
+      </button>
+
+      <!-- Menú de navegación -->
+      <nav id="main-nav">
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Contáctanos</a></li>
+          <li><a href="#">Salida</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="fondo-contenedor">
+      <div class="fondo-img"></div>
+      <div class="fondo-degradado"></div>
+    </div>
 
     <div class="general">
       <div class="cuadro_estado">
         <div class="search" id="search_prod">
-          <input id="busqueda" type="text" placeholder="Buscar Alimento... " />
+          <button
+            class="btn-togle_factura"
+            id="toggleBtn_factura"
+            onclick="despligue_factura()"
+          >
+            <img src="/assets/images/imgDashCli/clipboard-check .svg" alt="" />
+          </button>
+          <input
+            id="busqueda"
+            type="text"
+            placeholder="Porducto a buscar..."
+            onfocus="this.placeholder=''"
+            onblur="if(this.value === '') this.placeholder='Producto a buscar...'"
+          />
+
+          <select id="categoriaSelect">
+            <option value="">Categoría</option>
+          </select>
         </div>
         <div class="resultados" id="resultados"></div>
         <div class="last_order" id="last_order"><h1>Ultimo pedido:</h1></div>
         <div class="list_order">
+          <button class="btn-togle" id="toggleBtn" onclick="despligue()">
+            desplegar
+          </button>
+          <div class="contendor_last">
+            <table id="contenido" style="display: none">
+              <thead>
+                <tr></tr>
+              </thead>
+              <tbody id="list_order_table"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="factura" id="factura" style="display: none">
+        <button
+          class="btn-togle_factura_negative"
+          id="toggleBtn_factura_negative"
+          onclick="despligue_factura_negative()"
+        >
+          Regresar
+        </button>
+
+        <!-- <p id="pedido_title">Pedidos: </p> -->
+        <div class="tablas_">
           <table>
             <thead>
               <tr>
                 <td><p>Producto</p></td>
-                <td><p>Fecha</p></td>
-                <td><p>Precio(S./)</p></td>
+                <td><p>Cantidad</p></td>
+                <td><p>Precio(s/.)</p></td>
               </tr>
             </thead>
-            <tbody id="list_order_table"></tbody>
+            <tbody id="tabla_pedidos"></tbody>
           </table>
         </div>
-      </div>
-
-      <div class="factura" id="factura">
-        <p id="pedido_title">Pedidos:</p>
-        <table>
-          <thead>
-            <tr>
-              <td><p>Producto</p></td>
-              <td><p>Cantidad</p></td>
-              <td><p>Precio(s/.)</p></td>
-            </tr>
-          </thead>
-          <tbody id="tabla_pedidos"></tbody>
-        </table>
         <button id="btn-pagar">Pagar</button>
       </div>
     </div>

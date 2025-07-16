@@ -1,26 +1,47 @@
 [
   {
-    "id": "P001",
-    "nombre": "Hamburguesa Doble",
-    "precio": 18.5,
-    "fecha": "2025-06-14"
+    "sale_id": 1,
+    "client_id": 2,
+    "stall_id": 1,
+    "date": "2025-06-14",
+    "totalAmount": 37.0,
+    "items": [
+      {
+        "product_id": 5,
+        "name": "Hamburguesa Doble",
+        "quantity": 1,
+        "unit_price": 18.5
+      }
+    ]
   },
   {
-    "id": "P002",
-    "nombre": "Pizza Personal",
-    "precio": 22.0,
-    "fecha": "2025-06-14"
+    "sale_id": 2,
+    "client_id": 2,
+    "stall_id": 1,
+    "date": "2025-06-13",
+    "totalAmount": 30.0,
+    "items": [
+      {
+        "product_id": 7,
+        "name": "Combo Pollo + Papas",
+        "quantity": 1,
+        "unit_price": 30.0
+      }
+    ]
   },
   {
-    "id": "P003",
-    "nombre": "Combo Pollo + Papas",
-    "precio": 30.0,
-    "fecha": "2025-06-13"
-  },
-  {
-    "id": "P004",
-    "nombre": "Agua Mineral",
-    "precio": 4.5,
-    "fecha": "2025-06-12"
+    "sale_id": 3,
+    "client_id": 1,
+    "stall_id": 2,
+    "date": "2025-06-12",
+    "totalAmount": 4.5,
+    "items": [
+      {
+        "product_id": 8,
+        "name": "Agua Mineral",
+        "quantity": 1,
+        "unit_price": 4.5
+      }
+    ]
   }
 ]
