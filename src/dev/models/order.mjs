@@ -1,8 +1,5 @@
 import { pool } from './dbConnect.mjs'
-import dotenv from 'dotenv'
 
-
-dotenv.config()
 export class OrderModel {
   static async getUserID (role, user, client) {
     try {
@@ -23,12 +20,18 @@ export class OrderModel {
 static async setOrder({ input }) {
   const client = await pool.connect();
   const { role, user, clientName, payMethod, products } = input;
+  let clientId
+  let stallId
 
   try {
-    const stallId = await this.getUserID(role, user, client);
-    const clientId = await this.getUserID('client', clientName, client);
+    if (role == 'stall') {
+      stallId = await this.getUserID(role, user, client);
+      clientId = await this.getUserID('client', clientName, client);
+    } else {
+      stallId = await this.getUserID('stall', 'Alejandro', client);
+      clientId = await this.getUserID(role, user, client);
+    }
 
-    console.log(stallId)
     await client.query('BEGIN');
 
     const { rows: saleRows } = await client.query(`

@@ -1,20 +1,13 @@
-  export let productos = [];
   export let pedidos_realizados = [];
-  export let pedidos = [];
-
-  export function cargarProductos(ruta) {
-    return fetch(ruta)
-      .then(res => res.json())
-      .then(data => {
-        productos = data;
-        return data;
-      });
-  }
+  export let pedidos = {};
+  export let order = {};
 
   export function cargarPedidos(ruta) {
     return fetch(ruta)
       .then(res => res.json());
   }
+
+const socket = io()
 
 export function renderizarUltimoPedido(lista, container) {
   const ultimo = lista[lista.length - 1];
@@ -51,25 +44,12 @@ export function renderizarListaPedidos(lista, container) {
       <div><p>s/. ${element.totalAmount.toFixed(2)}</p></div>
     `;
 
-    const hr = document.createElement("hr");
+ hr = document.createElement("hr");
 
     container.insertBefore(hr, container.firstChild);
     container.insertBefore(tr, container.firstChild);
   });
 }
-
-
-
-export function filtrar(texto, base, categoria = null) {
-  const t = texto.toLowerCase();
-
-  return base.filter(p => {
-    const coincideNombre = p.name.toLowerCase().includes(t);
-    const coincideCategoria = !categoria || p.category_id === categoria.category_id;
-    return coincideNombre && coincideCategoria;
-  });
-}
-
 
 export function mostrarResultados(text, array_filter, container, callbackAgregar) {
   container.innerHTML = "";
@@ -80,6 +60,8 @@ export function mostrarResultados(text, array_filter, container, callbackAgregar
   } else {
     container.classList.add("visible");
     array_filter.forEach(element => {
+
+      console.log(element.productId)
       const general_filter = document.createElement("div");
       general_filter.classList.add("general_filter");
 
@@ -113,9 +95,9 @@ export function mostrarResultados(text, array_filter, container, callbackAgregar
       input.setAttribute("placeholder", "Cantidad...");
 
       const button = document.createElement("button");
-      button.innerHTML = "<img src='assets/images/imgDashCli/plus.svg'>";
+      button.innerHTML = "<img src='/assets/images/imgDashCli/plus.svg'>";
       button.addEventListener("click", () => {
-        callbackAgregar(element, element.product_id, element.name, element.price, input);
+        callbackAgregar(element, element.productId, element.name, element.price, input);
       });
 
       const entrega = document.createElement("div");
@@ -168,54 +150,57 @@ export function agregar(elemento, id, name_1, price, inputElement) {
   tbody.appendChild(element_factura);
 
   // También registramos pedido simple para el backend
-  pedidos.push({
-    product_id: id,
-    quantity: cantidad,
-    unit_price: price
-  });
+  pedidos[id] = cantidad;
   console.log("Estado actual de pedidos:", pedidos);
   console.log("Estado actual de pedidos:", pedidos_realizados);
 }
 
-  export function enviarPedido() {
-    console.log(pedidos);
-    fetch("/ruta/backend", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(pedidos)
-    });
-  }
+export function enviarPedido(payMethod) {
+  order = { 'payMethod': payMethod }
+  order['products'] = pedidos
+  console.log(order)
+  socket.emit("client:order", order, (res) => {
+    if (!res.success) {
+      return Swal.fire({
+        icon: res.status,
+        title: res.message
+      })
+    }
+    return Swal.fire({
+      icon: res.status,
+      title: res.message
+    })
+  })
+}
 
 const toggleBtn = document.getElementById("toggleBtn");
 const contenido = document.getElementById("contenido");
 let visible = false;
 
-function despligue() {
+function despliegue() {
   visible = !visible;
   contenido.style.display = visible ? "table" : "none";
   toggleBtn.textContent = visible ? "Ocultar" : "Desplegar";
 }
-toggleBtn.addEventListener("click", despligue);
+toggleBtn.addEventListener("click", despliegue);
 
 
 const toggleBtn_1 = document.getElementById("toggleBtn_factura");
 const factura = document.getElementById("factura");
 let visibble_factura = false ;
-function despligue_factura(){
+function despliegue_factura(){
   visibble_factura = !visibble_factura;
   factura.style.display = visibble_factura ? "flex " : "none";
 }
-toggleBtn_1.addEventListener("click", despligue_factura)
+toggleBtn_1.addEventListener("click", despliegue_factura)
 
 const toggleBtn_1_negative = document.getElementById("toggleBtn_factura_negative");
 const factura_negative = document.getElementById("factura");
 let visibble_factura_negative = true ;
-function despligue_factura_negative(){
+function despliegue_factura_negative(){
   factura_negative.style.display = visibble_factura_negative ? "none " : "flex";
 }
-toggleBtn_1_negative.addEventListener("click", despligue_factura_negative)
+toggleBtn_1_negative.addEventListener("click", despliegue_factura_negative)
 
 
 

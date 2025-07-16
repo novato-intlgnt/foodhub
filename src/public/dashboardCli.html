@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/dashboard/dashboardCli/styles.css" />
 
     <script src="/socket.io/socket.io.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <script
       type="module"
       src="/js/dashboardCli/dashCli-script.js"
@@ -59,7 +60,7 @@
           <button
             class="btn-togle_factura"
             id="toggleBtn_factura"
-            onclick="despligue_factura()"
+            onclick="despliegue_factura()"
           >
             <img src="/assets/images/imgDashCli/clipboard-check .svg" alt="" />
           </button>
@@ -78,7 +79,7 @@
         <div class="resultados" id="resultados"></div>
         <div class="last_order" id="last_order"><h1>Ultimo pedido:</h1></div>
         <div class="list_order">
-          <button class="btn-togle" id="toggleBtn" onclick="despligue()">
+          <button class="btn-togle" id="toggleBtn" onclick="despliegue()">
             desplegar
           </button>
           <div class="contendor_last">
@@ -95,7 +96,7 @@
         <button
           class="btn-togle_factura_negative"
           id="toggleBtn_factura_negative"
-          onclick="despligue_factura_negative()"
+          onclick="despliegue_factura_negative()"
         >
           Regresar
         </button>

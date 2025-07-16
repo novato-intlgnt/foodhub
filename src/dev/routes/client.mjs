@@ -1,10 +1,17 @@
 import { Router } from 'express'
-import { UserController } from '../controllers/users.mjs'
+import { ClientController } from '../controllers/clients.mjs'
 import { METHODS as auth } from '../middlewares/auth.mjs'
-import {  assignRole } from '../middlewares/userHandler.mjs'
 
-export const clientRouter = ({ workerModel }) => {
+export const clientRouter = ({ clientModel }) => {
   const clientRouter = Router()
+
+  const clientController = new ClientController({ clientModel })
+
+  clientRouter.post('/products', auth.userData, clientController.getAllProducts)
+  clientRouter.get('/categories', auth.userData, clientController.getAllCategories)
+
+  // clientRouter.post('/categories', auth.userData, clientController.addCategory)
+  // clientRouter.post('/product', auth.userData, clientController.addProduct)
 
   return clientRouter
 }

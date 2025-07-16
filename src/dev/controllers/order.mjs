@@ -1,4 +1,4 @@
-import { validateOrder } from "../schemes/orderScheme.mjs"
+import { validateOrder, validatePartialOrder } from "../schemes/orderScheme.mjs"
 
 export class OrderController {
   constructor ({ orderModel }) {
@@ -7,7 +7,7 @@ export class OrderController {
 
   setOrder = async (io, socket) => {
       try {
-        const  result = validateOrder(socket.body); 
+        const  result = validatePartialOrder(socket.body); 
         
         console.log(socket.body)
         if (!result.success) {
