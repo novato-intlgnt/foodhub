@@ -132,11 +132,78 @@ document.getElementById('addOrderProdBtn').addEventListener('click', () => {
     .forEach(id => document.getElementById(id).value = '');
 });
 
-// Guardar pedido - limpieza de formulario por el momento
 document.getElementById('saveOrderBtn').addEventListener('click', () => {
-  if (!orderProductsBody.children.length) return alert('Agrega al menos un producto');
+  if (orderProductsBody.children.length === 0) {
+    return alert('Agrega al menos un producto al pedido antes de guardarlo');
+  }
+
   alert('Pedido registrado correctamente');
+
+  // Obtener productos del pedido actual
+  let products = [];
+  for (let row of orderProductsBody.children) {
+    const cells = row.children;
+    products.push(`${cells[1].textContent} ${cells[0].textContent}`);
+  }
+
+  // Calcular total del pedido
+  const totalPedido = Array.from(orderProductsBody.children).reduce((acc, row) => {
+    return acc + parseFloat(row.children[3].textContent);
+  }, 0);
+
+  // Confirmar entrega
+  function confirmarEntrega(callback) {
+    const confirmado = confirm("¿Estás seguro de que deseas marcar este pedido como ENTREGADO?");
+    if (confirmado && typeof callback === 'function') {
+      callback(); // Ejecuta la acción final
+    }
+  }
+
+  // Estado card
+  const card = document.createElement('div');
+  card.className = 'card';
+  let estado = 'pendiente';
+
+  const btnEstado = document.createElement('button');
+  btnEstado.className = 'btn-estado';
+  btnEstado.textContent = 'Preparar';
+  btnEstado.style.backgroundColor = '#e67e22'; // naranja
+
+  btnEstado.addEventListener('click', () => {
+    if (estado === 'pendiente') {
+      estado = 'preparando';
+      btnEstado.textContent = 'Listo para entregar';
+      btnEstado.style.backgroundColor = '#0a843dff'; // verde
+    } else if (estado === 'preparando') {
+      estado = 'listo';
+      btnEstado.textContent = 'Entregar';
+      btnEstado.style.backgroundColor = '#e74c3c'; // rojo
+    } else if (estado === 'listo') {
+      confirmarEntrega(() => {
+        estado = 'entregado';
+        card.remove();
+      });
+    }
+  });
+
+  card.innerHTML = `
+    <p class="user">Usuario: varios <span class="total">TOTAL: ${totalPedido.toFixed(2)}</span></p>
+    <p>${products.join('<br>')}</p>
+  `;
+  card.appendChild(btnEstado);
+  document.getElementById('pendingCards').appendChild(card);
+
+  // Vaciar tabla de productos del pedido
   orderProductsBody.innerHTML = '';
-  orderCategorySelect.selectedIndex = 0;
-  ['orderDate','clientName','paymentMode'].forEach(id => document.getElementById(id).value = id === 'clientName' ? 'Varios' : '');
+  catSelect.selectedIndex = 0;
+
+  // Incrementar contador y refrescar número
+  orderCounter++;
+  refreshOrderNumber();
+
+  // Limpiar formulario
+  document.getElementById('orderDate').value = '';
+  document.getElementById('clientName').value = 'Varios';
+  document.getElementById('paymentMode').value = '';
 });
+
