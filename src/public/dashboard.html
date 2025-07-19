@@ -1,144 +1,122 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Dashboard</title>
-    <link rel="shortcut icon" href="/assets/icons/favicon.ico" />
-    <link rel="stylesheet" href="/css/dashboard/dashboard.css" />
-    <link rel="stylesheet" href="/css/dashboard/input_dash.css" />
-    <link rel="stylesheet" href="/css/dashboard/explorer.css" />
-    <link rel="stylesheet" href="/css/dashboard/library.css" />
-    <link rel="stylesheet" href="/css/dashboard/popup.css" />
-    <!-- Boxicons CDN Link -->
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="/js/dashboard/dashboard.js" defer></script>
-    <script src="/js/dashboard/input_dash.js" defer></script>
-    <script src="/js/dashboard/explorer.js" defer></script>
-    <script src="/js/dashboard/library.js" defer></script>
-    <script src="/js/dashboard/popup-search.js" defer></script>
-  </head>
-  <body>
-    <div class="sidebar">
-      <div class="logo-details">
-        <img src="/assets/images/logo.png" class="logo"></img>
-        <div class="logo_name">LyricFusion</div>
-        <i class="fi fi-rr-menu-burger" id="btn"></i>
-      </div>
-      <ul class="nav-list">
-        <li>
-          <i class="fi fi-rr-search"></i>
-          <div class="container-search">
-            <div class="input-bx">
-              <input class="sidebar-input" type="text" id="artist" required/>
-              <span><i class="fi fi-rr-microphone"></i> Puestos</span>
-            </div>
-            <div class="input-bx">
-              <input class="sidebar-input" type="text" id="songs" required/>
-              <span><i class="fi fi-rr-list-music"></i> Productos</span>
-            </div>
-          </div>
-        <span class="tooltip">Search</span>
-        </li>
-        <li>
-          <a id="btn-library" href="#">
-            <i class="fi fi-rr-books-medical"></i>
-            <span class="links_name">Nuevo Pedido</span>
-          </a>
-          <span class="tooltip">Nuevo Pedido</span>
-        </li>
-        <li>
-          <a href="#explorer-section">
-            <i class="fi fi-rr-site-alt"></i>
-            <span class="links_name">Pedidos</span>
-          </a>
-          <span class="tooltip">Pedidos</span>
-        </li>
-        <li>
-          <a href="#about-section">
-            <i class="fi fi-rr-info"></i>
-            <span class="links_name">Stock</span>
-          </a>
-          <span class="tooltip">Stock</span>
-        </li>
-        <li class="profile">
-          <div class="profile-details">
-            <img src="profile.jpg" alt="profileImg" />
-            <div class="name_job">
-              <div id="user" class="name"> a</div>
-            </div>
-          </div>
-          <i class="fi fi-rr-sign-out-alt" id="log_out"></i>
-        </li>
-      </ul>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard de Tienda</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="dashboardnew.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="nav-group">
+      <button class="nav-btn" data-target="section-register" title="Registrar Pedido"><i class='bx bx-edit'></i></button>
+      <button class="nav-btn" data-target="section-add-product" title="Añadir Producto"><i class='bx bx-plus-circle'></i></button>
+      <button class="nav-btn" data-target="section-orders" title="Registros del Día"><i class='bx bx-list-ul'></i></button>
     </div>
-    <!-- Library section-->
-    <section id="library-section" class="home-section">
-      <div class="library-header">
-        <div class="text">Nuevo Pedido</div>
-        <div id="searchGallery" class="search-box">
-          <input id="inputSearch" class='input-search' type="text" placeholder="Type to search..">
-          <div id="iconSearch" class="icon-search">
-            <i class='fi fi-rr-search'></i>
+    <button class="nav-btn" id="signOutBtn" title="Cerrar Sesión"><i class='bx bx-log-out'></i></button>
+  </aside>
+
+  <div class="sections">
+    <!-- Registrar Pedido -->
+    <section id="section-register">
+      <div class="content">
+        <div class="form-container">
+          <h2>Registrar Pedido</h2>
+          <div class="row">
+            <div class="col"><label>Fecha</label><input type="date" id="orderDate"></div>
+            <div class="col"><label>Nro de pedido</label><input type="text" id="orderNumber" readonly></div>
           </div>
-          <div id="cancelSearch" class="cancel-icon">
-            <i class="fi fi-rr-cross-small"></i>
-          </div>
-          <div id="songData" class="search-data">
-        </div>
-        </div>
-      </div>
-      <div class="container-gallery">
-        <ul id="user-gallery" class="gallery"></ul>
-      </div>
-      <div class="footer">
-        <div class="pages">
-        </div>
-        <button class="select-btn" type=""><i class="fi fi-rr-choose"></i> select</button>
-        <div class="actions-container">
-          <button id="cancel-btn" class="action-btn cancel"><i class="fi fi-rr-cross"></i> cancel</button>
-          <button id="ready-btn" class="action-btn ready"><i class="fi fi-rr-check"></i> ready</button>
-        </div>
-      </div>
-    </section>
-    <!-- Explorer section-->
-    <section id="explorer-section" class="home-section">
-      <div class="text">Pedidos</div>
-      <div class="container-search-net">
-        <h2>Pedidos</h2>
-        <form id="form-explorer" class="form-explorer" action="">
-          <div class="inputs">
-            <div class="input-bx">
-              <input type="text" id="artistNet" name="artistNet" required/>
-              <span><i class="fi fi-rr-microphone"></i> Producto</span>
-            </div>
-            <div class="input-bx">
-              <input type="text" id="songsNet" name="songNet" required/>
-              <span><i class="fi fi-rr-list-music"></i> Fecha</span>
+          <div class="row">
+            <div class="col"><label>Cliente</label><input type="text" id="clientName" value="Varios" readonly></div>
+            <div class="col">
+              <label>Modo de pago</label>
+              <select id="paymentMode" autocomplete="off">
+                <option value="" disabled selected>Seleccione modo de pago</option>
+                <option value="Efectivo">Efectivo</option>
+                <option value="Yape">Yape</option>
+              </select>
             </div>
           </div>
-          <button type="submit">
-            <i class="fi fi-br-search"></i>
-          </button>
-        </form>
+          
+          <div class="product-inputs">
+            <select id="orderProdCategory">
+              <option value="" disabled selected>Seleccione categoría</option>
+            </select>
+            <input list="productsList" id="orderProdName" placeholder="Producto">
+            <datalist id="productsList"></datalist>
+            <input type="number" id="orderProdQuantity" placeholder="Cantidad">
+            <input type="number" id="orderProdUnitPrice" placeholder="P. unidad" readonly>
+            <input type="text" id="orderProdTotal" placeholder="Total" readonly>
+          </div>
+          <div class="table-container">
+            <h3>Productos en el Pedido</h3>
+            <table>
+              <thead><tr><th>Producto</th><th>Cant</th><th>P.unit</th><th>Total</th></tr></thead>
+              <tbody id="orderProductsBody"></tbody>
+            </table>
+          </div>
+          <div class="actions">
+            <button class="btn-secondary" id="addOrderProdBtn">Agregar Producto</button>
+            <button class="btn-primary" id="saveOrderBtn">Guardar Pedido</button>
+          </div>
+        </div>
+        <div class="table-container">
+          <h2>Pedidos Pendientes</h2>
+          <table>
+            <thead><tr><th>Nro Pedido</th><th>Producto</th></tr></thead>
+            <tbody id="pendingOrdersBody"></tbody>
+          </table>
+        </div>
       </div>
-      <ul id="list-songs" class="list-songs">
-      </ul>
-    </section>
-    <!-- About us section-->
-    <section id="about-section" class="home-section">
-      <div class="text">About Us</div>
     </section>
 
-    <div class="container-popup">
-      <ul class="list-songs popup-search">
-      </ul>
-    </div>
+    <!-- Añadir Producto -->
+    <section id="section-add-product">
+      <div class="content">
+        <div class="table-container">
+          <h2>Productos Agregados</h2>
+          <table>
+            <thead><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock</th></tr></thead>
+            <tbody id="addedProductsBody"></tbody>
+          </table>
+        </div>
+        <div class="form-container">
+          <h2>Añadir Producto</h2>
+          <div class="row">
+            <input type="text" id="prodName" placeholder="Producto">
+            <select id="prodCategory">
+              <option value="" disabled selected>Seleccione categoría</option>
+              <option value="Bebidas">Bebidas</option>
+              <option value="Sandwiches">Sandwiches</option>
+              <option value="Almuerzos">Almuerzos</option>
+              <option value="Galletas y otros">Galletas y otros</option>
+            </select>
+            <input type="number" id="prodPrice" placeholder="Precio">
+            <input type="number" id="prodStock" placeholder="Stock">
+          </div>
+          <div class="actions">
+            <button class="btn-secondary" id="addProductBtn">Agregar</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <script src="/js/dashboard/library-utils.js" ></script>
-  </body>
+    <!-- Registros del Día -->
+    <section id="section-orders">
+      <div class="content" style="width:100%;">
+        <div class="table-container">
+          <h2>Registro de Pedidos del Día</h2>
+          <table>
+            <thead><tr><th>Nro Pedido</th><th>Producto</th><th>Cant</th><th>Total</th><th>Modo Pago</th></tr></thead>
+            <tbody id="dailyRecordsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+<script src="dasboardnew.js"></script>
+</body>
+
 </html>
+
